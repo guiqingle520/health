@@ -13,12 +13,12 @@ flutter create mobile --platforms=android,ios,web
 
 然后保留并合并已有业务入口文件：
 
-- `/home/runner/work/health/health/apps/mobile/lib/main.dart`
+- `apps/mobile/lib/main.dart`（或在 mobile 目录下使用 `lib/main.dart`）
 
 ## 安装依赖
 
 ```bash
-cd /home/runner/work/health/health/apps/mobile
+cd apps/mobile
 flutter pub get
 ```
 
@@ -46,12 +46,12 @@ flutter build appbundle --release
 
 5. 产物路径：
 
-- APK: `/home/runner/work/health/health/apps/mobile/build/app/outputs/flutter-apk/app-release.apk`
+- APK: `build/app/outputs/flutter-apk/app-release.apk`（在 `apps/mobile` 目录下）
 
 ## iOS 本地真机部署（仅 macOS）
 
 ```bash
-cd /home/runner/work/health/health/apps/mobile
+cd apps/mobile
 open ios/Runner.xcworkspace
 ```
 

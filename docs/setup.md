@@ -11,9 +11,9 @@ npm run start:dev
 ## Mobile
 
 ```bash
-cd /home/runner/work/health/health/apps
+cd apps
 flutter create mobile --platforms=android,ios,web
-cd /home/runner/work/health/health/apps/mobile
+cd mobile
 flutter pub get
 flutter run -d chrome
 ```
@@ -21,7 +21,7 @@ flutter run -d chrome
 ### Android device
 
 ```bash
-cd /home/runner/work/health/health/apps/mobile
+cd apps/mobile
 flutter devices
 flutter run -d <deviceId>
 flutter build apk --release
@@ -30,12 +30,12 @@ flutter build appbundle --release
 
 APK output:
 
-- `/home/runner/work/health/health/apps/mobile/build/app/outputs/flutter-apk/app-release.apk`
+- `build/app/outputs/flutter-apk/app-release.apk`（在 `apps/mobile` 目录下）
 
 ### iOS device (macOS only)
 
 ```bash
-cd /home/runner/work/health/health/apps/mobile
+cd apps/mobile
 open ios/Runner.xcworkspace
 flutter run -d <iosDeviceId>
 ```
