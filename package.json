@@ -1,0 +1,14 @@
+{
+  "name": "health-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/backend",
+    "packages/shared"
+  ],
+  "scripts": {
+    "backend:build": "npm --workspace apps/backend run build",
+    "backend:lint": "npm --workspace apps/backend run lint",
+    "backend:test": "npm --workspace apps/backend run test"
+  }
+}

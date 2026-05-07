@@ -1,7 +1,7 @@
 {
-  "name": "health-backend-template",
+  "name": "health-backend",
   "version": "0.0.1",
-  "description": "",
+  "description": "Health management backend service",
   "author": "",
   "private": true,
   "license": "UNLICENSED",

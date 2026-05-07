@@ -21,3 +21,11 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+# Node/Flutter
+node_modules/
+**/node_modules/
+apps/backend/dist/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
