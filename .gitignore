@@ -29,3 +29,8 @@ apps/backend/dist/
 .flutter-plugins
 .flutter-plugins-dependencies
 build/
+.idea/
+.repair-backup-20260508-191330/
+.claude/
+.github/
+.run/
