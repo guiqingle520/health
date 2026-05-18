@@ -560,6 +560,52 @@ class LoginResult {
   }
 }
 
+class DietHistoryItem {
+  const DietHistoryItem({
+    required this.mealType,
+    required this.foodName,
+    required this.nutrition,
+    required this.recordedOn,
+  });
+
+  final String mealType;
+  final String foodName;
+  final Map<String, dynamic> nutrition;
+  final String recordedOn;
+
+  factory DietHistoryItem.fromJson(Map<String, dynamic> json) {
+    return DietHistoryItem(
+      mealType: json['mealType'] as String? ?? '',
+      foodName: json['foodName'] as String? ?? '',
+      nutrition: (json['nutrition'] as Map?)?.cast<String, dynamic>() ?? const {},
+      recordedOn: json['recordedOn'] as String? ?? '',
+    );
+  }
+}
+
+class ExerciseHistoryItem {
+  const ExerciseHistoryItem({
+    required this.exerciseType,
+    required this.durationMinutes,
+    required this.caloriesBurned,
+    required this.recordedOn,
+  });
+
+  final String exerciseType;
+  final int durationMinutes;
+  final num caloriesBurned;
+  final String recordedOn;
+
+  factory ExerciseHistoryItem.fromJson(Map<String, dynamic> json) {
+    return ExerciseHistoryItem(
+      exerciseType: json['exerciseType'] as String? ?? '',
+      durationMinutes: json['durationMinutes'] as int? ?? 0,
+      caloriesBurned: json['caloriesBurned'] as num? ?? 0,
+      recordedOn: json['recordedOn'] as String? ?? '',
+    );
+  }
+}
+
 class ApiClient {
   ApiClient({
     String? baseUrl,
@@ -638,11 +684,103 @@ class ApiClient {
     return DashboardView.fromJson(_decodeObject(response.body));
   }
 
+  Future<List<DietHistoryItem>> fetchDietHistory(
+    String accessToken, {
+    String? from,
+    String? to,
+    int? limit,
+  }) async {
+    final response = await http.get(
+      _buildUri(
+        '/health/diet-records',
+        from: from,
+        to: to,
+        limit: limit,
+      ),
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('HTTP ${response.statusCode}: ${response.body}');
+    }
+
+    return _decodeList(response.body)
+        .map((item) => DietHistoryItem.fromJson(item))
+        .toList();
+  }
+
+  Future<List<ExerciseHistoryItem>> fetchExerciseHistory(
+    String accessToken, {
+    String? from,
+    String? to,
+    int? limit,
+  }) async {
+    final response = await http.get(
+      _buildUri(
+        '/health/exercise-records',
+        from: from,
+        to: to,
+        limit: limit,
+      ),
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('HTTP ${response.statusCode}: ${response.body}');
+    }
+
+    return _decodeList(response.body)
+        .map((item) => ExerciseHistoryItem.fromJson(item))
+        .toList();
+  }
+
   Map<String, dynamic> _decodeObject(String body) {
     final decoded = jsonDecode(body);
     if (decoded is! Map<String, dynamic>) {
       throw const FormatException('response is not a JSON object');
     }
     return decoded;
+  }
+
+  List<Map<String, dynamic>> _decodeList(String body) {
+    final decoded = jsonDecode(body);
+    if (decoded is! List) {
+      throw const FormatException('response is not a JSON array');
+    }
+
+    return decoded.map((item) {
+      if (item is! Map) {
+        throw const FormatException('response item is not a JSON object');
+      }
+      return item.cast<String, dynamic>();
+    }).toList();
+  }
+
+  Uri _buildUri(
+    String path, {
+    String? from,
+    String? to,
+    int? limit,
+  }) {
+    final queryParameters = <String, String>{};
+    if (from != null) {
+      queryParameters['from'] = from;
+    }
+    if (to != null) {
+      queryParameters['to'] = to;
+    }
+    if (limit != null) {
+      queryParameters['limit'] = limit.toString();
+    }
+
+    return Uri.parse(
+      '$_baseUrl$path',
+    ).replace(queryParameters: queryParameters.isEmpty ? null : queryParameters);
   }
 }

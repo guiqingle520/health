@@ -2,47 +2,45 @@ import { Injectable } from '@nestjs/common';
 import { CreateDietRecordDto } from './dto/create-diet-record.dto';
 import { CreateExerciseRecordDto } from './dto/create-exercise-record.dto';
 import { CreateProfileDto } from './dto/create-profile.dto';
+import { GetRecordHistoryQueryDto } from './dto/get-record-history-query.dto';
 import { UpsertMyProfileDto } from './dto/upsert-my-profile.dto';
 import {
   DailySummary,
   DashboardView,
-  NutritionMetrics,
+  DietRecordHistoryItem,
+  ExerciseRecordHistoryItem,
 } from './interfaces/health.types';
+import { HealthRepository } from './health.repository';
 
 @Injectable()
 export class HealthService {
-  private readonly profiles = new Map<string, CreateProfileDto>();
-  private readonly dietRecords: Array<CreateDietRecordDto & { date: string }> =
-    [];
-  private readonly exerciseRecords: Array<
-    CreateExerciseRecordDto & { date: string }
-  > = [];
+  constructor(private readonly healthRepository: HealthRepository) {}
 
-  saveProfile(payload: CreateProfileDto): CreateProfileDto {
-    this.profiles.set(payload.id, payload);
-    return payload;
+  saveProfile(payload: CreateProfileDto): Promise<CreateProfileDto> {
+    return this.healthRepository.upsertProfile(payload.id, {
+      nickname: payload.nickname,
+      age: payload.age,
+      gender: payload.gender,
+      heightCm: payload.heightCm,
+      weightKg: payload.weightKg,
+      goal: payload.goal,
+    });
   }
 
   upsertMyProfile(
     userId: string,
     payload: UpsertMyProfileDto,
-  ): CreateProfileDto {
-    const profile: CreateProfileDto = {
-      id: userId,
-      ...payload,
-    };
-
-    this.profiles.set(userId, profile);
-    return profile;
+  ): Promise<CreateProfileDto> {
+    return this.healthRepository.upsertProfile(userId, payload);
   }
 
-  getProfile(userId: string): CreateProfileDto | undefined {
-    return this.profiles.get(userId);
+  getProfile(userId: string): Promise<CreateProfileDto | undefined> {
+    return this.healthRepository.findProfileByUserId(userId);
   }
 
-  getDashboard(userId: string, date: string): DashboardView {
-    const summary = this.getDailySummary(userId, date);
-    const profile = this.getProfile(userId);
+  async getDashboard(userId: string, date: string): Promise<DashboardView> {
+    const summary = await this.getDailySummary(userId, date);
+    const profile = await this.getProfile(userId);
     const healthScore = this.calculateHealthScore(summary);
 
     return {
@@ -69,63 +67,51 @@ export class HealthService {
     };
   }
 
+  async getDietRecordHistory(
+    userId: string,
+    query: GetRecordHistoryQueryDto,
+  ): Promise<DietRecordHistoryItem[]> {
+    const { from, to, limit } = this.normalizeHistoryQuery(query);
+    return this.healthRepository.findDietRecordsByUserIdAndDateRange(
+      userId,
+      from,
+      to,
+      limit,
+    );
+  }
+
+  async getExerciseRecordHistory(
+    userId: string,
+    query: GetRecordHistoryQueryDto,
+  ): Promise<ExerciseRecordHistoryItem[]> {
+    const { from, to, limit } = this.normalizeHistoryQuery(query);
+    return this.healthRepository.findExerciseRecordsByUserIdAndDateRange(
+      userId,
+      from,
+      to,
+      limit,
+    );
+  }
+
   addDietRecord(
     payload: CreateDietRecordDto,
-  ): CreateDietRecordDto & { date: string } {
-    const record = {
-      ...payload,
-      date: new Date().toISOString().slice(0, 10),
-    };
-    this.dietRecords.push(record);
-    return record;
+  ): Promise<CreateDietRecordDto & { date: string }> {
+    const date = new Date().toISOString().slice(0, 10);
+    return this.healthRepository.insertDietRecord(payload, date);
   }
 
   addExerciseRecord(
     payload: CreateExerciseRecordDto,
-  ): CreateExerciseRecordDto & { date: string } {
-    const record = {
-      ...payload,
-      date: new Date().toISOString().slice(0, 10),
-    };
-    this.exerciseRecords.push(record);
-    return record;
+  ): Promise<CreateExerciseRecordDto & { date: string }> {
+    const date = new Date().toISOString().slice(0, 10);
+    return this.healthRepository.insertExerciseRecord(payload, date);
   }
 
-  getDailySummary(userId: string, date: string): DailySummary {
-    const intake = this.dietRecords
-      .filter((record) => record.userId === userId && record.date === date)
-      .reduce<NutritionMetrics>(
-        (acc, record) => ({
-          calories: acc.calories + record.nutrition.calories,
-          carbs: acc.carbs + record.nutrition.carbs,
-          protein: acc.protein + record.nutrition.protein,
-          fat: acc.fat + record.nutrition.fat,
-          fiber: acc.fiber + record.nutrition.fiber,
-          sodiumMg: acc.sodiumMg + record.nutrition.sodiumMg,
-          calciumMg: acc.calciumMg + record.nutrition.calciumMg,
-          ironMg: acc.ironMg + record.nutrition.ironMg,
-          vitaminAMcg: acc.vitaminAMcg + record.nutrition.vitaminAMcg,
-          vitaminCMg: acc.vitaminCMg + record.nutrition.vitaminCMg,
-          vitaminDIU: acc.vitaminDIU + record.nutrition.vitaminDIU,
-        }),
-        {
-          calories: 0,
-          carbs: 0,
-          protein: 0,
-          fat: 0,
-          fiber: 0,
-          sodiumMg: 0,
-          calciumMg: 0,
-          ironMg: 0,
-          vitaminAMcg: 0,
-          vitaminCMg: 0,
-          vitaminDIU: 0,
-        },
-      );
-
-    const burnedCalories = this.exerciseRecords
-      .filter((record) => record.userId === userId && record.date === date)
-      .reduce((sum, record) => sum + record.caloriesBurned, 0);
+  async getDailySummary(userId: string, date: string): Promise<DailySummary> {
+    const [intake, burnedCalories] = await Promise.all([
+      this.healthRepository.getDailyNutritionTotals(userId, date),
+      this.healthRepository.getDailyBurnedCalories(userId, date),
+    ]);
 
     return {
       date,
@@ -156,6 +142,27 @@ export class HealthService {
         ),
       ),
     );
+  }
+
+  private normalizeHistoryQuery(query: GetRecordHistoryQueryDto): {
+    from: string;
+    to: string;
+    limit: number;
+  } {
+    const today = new Date().toISOString().slice(0, 10);
+    const to = query.to ?? today;
+    const endDate = new Date(`${to}T00:00:00.000Z`);
+    const defaultFromDate = new Date(endDate);
+    defaultFromDate.setUTCDate(defaultFromDate.getUTCDate() - 29);
+
+    const from = query.from ?? defaultFromDate.toISOString().slice(0, 10);
+    const limit = Math.min(query.limit ?? 50, 100);
+
+    return {
+      from,
+      to,
+      limit,
+    };
   }
 
   private buildInsights(summary: DailySummary): string[] {

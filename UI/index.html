@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HealthGuard UI 原型归档</title>
+<style>
+  :root{--bg:#f4faf8;--paper:#fff;--ink:#173844;--muted:#61727b;--line:#dce9e6;--teal:#15a3a3;--mint:#ddf5ef;}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;letter-spacing:0}
+  header{padding:44px 56px 24px} h1{margin:0 0 12px;font-size:34px;line-height:1.2} p{margin:0;color:var(--muted);font-size:16px;line-height:1.7}.meta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}.tag{padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#087b83;font-weight:700;font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding:24px 56px 56px}.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 14px 28px rgba(18,52,60,.08)}.card h2{margin:0 0 12px;font-size:20px}.card img{width:100%;height:auto;border-radius:12px;background:#fff;border:1px solid var(--line)}.app-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.app-row img{max-height:620px;object-fit:contain}.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}.links a{color:#087b83;text-decoration:none;font-weight:800}.wide{grid-column:1/-1}@media (max-width:900px){header{padding:30px 20px 16px}.grid{grid-template-columns:1fr;padding:16px 20px 32px}.app-row{grid-template-columns:1fr}h1{font-size:28px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>HealthGuard UI 原型归档</h1>
+  <p>根据 <code>docs/04-ui/mobile-ui-design.md</code>、<code>docs/04-ui/web-ui-design.md</code> 与 <code>docs/reference/companion-context.md</code> 绘制。范围覆盖 App 与 Web 的登录、建档、仪表盘主路径，并补充 App 数据趋势、AI 建议和个人中心等功能页。陪伴上下文作为健康仪表盘的轻量解释层。</p>
+  <div class="meta"><span class="tag">浅绿灰背景</span><span class="tag">青绿色高亮</span><span class="tag">深绿机身边框</span><span class="tag">大字号表单</span><span class="tag">卡片式信息层级</span><span class="tag">陪伴上下文</span><span class="tag">数据趋势</span><span class="tag">AI 建议</span><span class="tag">个人中心</span></div>
+</header>
+<main class="grid">
+  <section class="card wide"><h2>总览画板</h2><img src="ui-prototype-board.svg" alt="App 与 Web 原型总览"/><div class="links"><a href="ui-prototype-board.svg">打开总览 SVG</a></div></section>
+  <section class="card wide"><h2>App 主流程</h2><div class="app-row"><img src="app-login.svg" alt="App 登录页"/><img src="app-onboarding.svg" alt="App 建档页"/><img src="app-dashboard.svg" alt="App 仪表盘页"/></div><div class="links"><a href="app-login.svg">登录</a><a href="app-onboarding.svg">建档</a><a href="app-dashboard.svg">仪表盘</a></div></section>
+  <section class="card wide"><h2>App 功能页</h2><div class="app-row"><img src="app-data.svg" alt="App 数据趋势页"/><img src="app-ai-advice.svg" alt="App AI 健康建议页"/><img src="app-profile.svg" alt="App 我的页"/></div><div class="links"><a href="app-data.svg">数据趋势</a><a href="app-ai-advice.svg">AI 建议</a><a href="app-profile.svg">我的</a></div></section>
+  <section class="card"><h2>Web 登录页</h2><img src="web-login.svg" alt="Web 登录页"/><div class="links"><a href="web-login.svg">打开 SVG</a></div></section>
+  <section class="card"><h2>Web 建档页</h2><img src="web-onboarding.svg" alt="Web 建档页"/><div class="links"><a href="web-onboarding.svg">打开 SVG</a></div></section>
+  <section class="card wide"><h2>Web 今日仪表盘</h2><img src="web-dashboard.svg" alt="Web 今日健康仪表盘"/><div class="links"><a href="web-dashboard.svg">打开 SVG</a></div></section>
+</main>
+</body>
+</html>

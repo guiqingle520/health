@@ -12,6 +12,20 @@ export interface NutritionMetrics {
   vitaminDIU: number;
 }
 
+export interface DietRecordHistoryItem {
+  mealType: 'breakfast' | 'lunch' | 'dinner' | 'snack';
+  foodName: string;
+  nutrition: NutritionMetrics;
+  recordedOn: string;
+}
+
+export interface ExerciseRecordHistoryItem {
+  exerciseType: 'aerobic' | 'strength' | 'flexibility';
+  durationMinutes: number;
+  caloriesBurned: number;
+  recordedOn: string;
+}
+
 export interface DailySummary {
   date: string;
   intake: NutritionMetrics;

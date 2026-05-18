@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2600" viewBox="0 0 1800 2600" role="img" aria-labelledby="title desc">
+<title id="title">App 与 Web 原型总览</title><desc id="desc">HealthGuard App 与 Web 原型总览 prototype.</desc><style>text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;letter-spacing:0}</style><rect x="0" y="0" width="1800" height="2600" fill="#EEF7F5"/>
+<text x="80" y="90" font-size="44" fill="#173844" font-weight="900">HealthGuard App / Web 原型总览</text><text x="80" y="130" font-size="20" fill="#61727B" font-weight="600">基于 docs/04-ui 与 docs/reference/companion-context.md 绘制</text>
+<text x="80" y="210" font-size="28" fill="#173844" font-weight="900">App 主流程</text>
+<image href="app-login.svg" x="80" y="250" width="258" height="523"/><image href="app-onboarding.svg" x="370" y="250" width="258" height="523"/><image href="app-dashboard.svg" x="660" y="250" width="258" height="523"/>
+<text x="118" y="850" font-size="20" fill="#173844" font-weight="800">登录</text><text x="408" y="850" font-size="20" fill="#173844" font-weight="800">建档</text><text x="698" y="812" font-size="20" fill="#173844" font-weight="800">仪表盘</text>
+<text x="980" y="210" font-size="28" fill="#173844" font-weight="900">App 功能页</text>
+<image href="app-data.svg" x="980" y="250" width="258" height="523"/><image href="app-ai-advice.svg" x="1270" y="250" width="258" height="523"/><image href="app-profile.svg" x="1560" y="250" width="170" height="858"/>
+<text x="1018" y="812" font-size="20" fill="#173844" font-weight="800">数据趋势</text><text x="1308" y="812" font-size="20" fill="#173844" font-weight="800">AI 建议</text><text x="1590" y="1148" font-size="20" fill="#173844" font-weight="800">我的长页</text>
+<text x="80" y="1240" font-size="28" fill="#173844" font-weight="900">Web 主流程</text>
+<image href="web-login.svg" x="80" y="1280" width="720" height="512"/><image href="web-onboarding.svg" x="80" y="1880" width="720" height="512"/><image href="web-dashboard.svg" x="980" y="1280" width="720" height="512"/>
+<text x="80" y="1830" font-size="20" fill="#173844" font-weight="800">Web 登录</text><text x="80" y="2430" font-size="20" fill="#173844" font-weight="800">Web 建档</text><text x="980" y="1830" font-size="20" fill="#173844" font-weight="800">Web 仪表盘</text>
+</svg>

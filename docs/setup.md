@@ -1,6 +1,6 @@
 # 项目启动指南
 
-本文档仅说明如何在本地启动当前仓库中的前后端应用。架构设计与路线图请查看 `docs/architecture.md`。
+本文档仅说明如何在本地启动当前仓库中的前后端应用。架构设计与路线图请查看 `docs/00-overview/architecture.md`。
 
 ## 1. 环境要求
 
@@ -13,7 +13,7 @@
 ### 后端
 
 - NestJS 依赖由 `apps/backend/package.json` 管理
-- 当前后端使用内存数据结构与 SQL 草案文件并行开发，启动本地 API 不依赖真实数据库
+- 当前后端使用 PostgreSQL Repository 与 SQL 草案并行演进；本地启动方式以 `apps/backend` 配置为准
 
 ### 移动端
 
@@ -122,4 +122,4 @@ npm run lint
 - 移动端：Flutter 登录、首次建档、仪表盘展示
 - 数据层：`apps/backend/sql/m1_m2_schema.sql` 提供第一阶段数据库草案
 
-如需理解模块关系、技术选型和后续路线图，请查看 `docs/architecture.md`。
+如需理解模块关系、技术选型和后续路线图，请查看 `docs/00-overview/architecture.md`。

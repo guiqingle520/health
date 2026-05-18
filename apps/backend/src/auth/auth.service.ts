@@ -2,30 +2,28 @@ import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { randomUUID } from 'crypto';
+import { LoginDto } from './dto/login.dto';
 import {
   AuthTokenPayload,
-  AuthUser,
   AuthTokens,
+  AuthUser,
   LoginResponse,
 } from './interfaces/auth.types';
-import { LoginDto } from './dto/login.dto';
 import { getJwtSecret } from './jwt-secret.util';
+import { AuthRepository } from './auth.repository';
 
 @Injectable()
 export class AuthService {
-  private readonly usersByPhone = new Map<string, AuthUser>();
-  private readonly usersById = new Map<string, AuthUser>();
-  private readonly refreshTokensByUserId = new Map<string, string>();
-
   constructor(
     @Inject(JwtService) private readonly jwtService: JwtService,
     @Inject(ConfigService) private readonly configService: ConfigService,
+    @Inject(AuthRepository) private readonly authRepository: AuthRepository,
   ) {}
 
   async login(payload: LoginDto): Promise<LoginResponse> {
-    const user = this.findOrCreateUser(payload.phone);
+    const user = await this.findOrCreateUser(payload.phone);
     const tokens = await this.issueTokens(user);
-    this.refreshTokensByUserId.set(user.id, tokens.refreshToken);
+    await this.authRepository.upsertRefreshToken(user.id, tokens.refreshToken);
     return { user, ...tokens };
   }
 
@@ -33,42 +31,39 @@ export class AuthService {
     userId: string,
     refreshToken: string,
   ): Promise<{ user: AuthUser } & AuthTokens> {
-    const savedToken = this.refreshTokensByUserId.get(userId);
+    const savedToken = await this.authRepository.findRefreshTokenByUserId(userId);
     if (!savedToken || savedToken !== refreshToken) {
       throw new UnauthorizedException('invalid refresh token');
     }
 
-    const user = this.usersById.get(userId);
+    const user = await this.authRepository.findUserById(userId);
     if (!user) {
       throw new UnauthorizedException('user not found');
     }
 
     const tokens = await this.issueTokens(user);
-    this.refreshTokensByUserId.set(user.id, tokens.refreshToken);
+    await this.authRepository.upsertRefreshToken(user.id, tokens.refreshToken);
     return { user, ...tokens };
   }
 
-  getUser(userId: string): AuthUser {
-    const user = this.usersById.get(userId);
+  async getUser(userId: string): Promise<AuthUser> {
+    const user = await this.authRepository.findUserById(userId);
     if (!user) {
       throw new UnauthorizedException('user not found');
     }
     return user;
   }
 
-  private findOrCreateUser(phone: string): AuthUser {
-    const existingUser = this.usersByPhone.get(phone);
+  private async findOrCreateUser(phone: string): Promise<AuthUser> {
+    const existingUser = await this.authRepository.findUserByPhone(phone);
     if (existingUser) {
       return existingUser;
     }
 
-    const user: AuthUser = {
+    return this.authRepository.createUser({
       id: randomUUID(),
       phone,
-    };
-    this.usersByPhone.set(phone, user);
-    this.usersById.set(user.id, user);
-    return user;
+    });
   }
 
   private async issueTokens(user: AuthUser): Promise<AuthTokens> {
