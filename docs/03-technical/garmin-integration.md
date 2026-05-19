@@ -36,6 +36,7 @@ Mobile App
   -> /integrations/garmin/oauth/callback
   -> connected_devices 保存授权关系
   -> backfill 拉取历史数据
+  -> Redis sync lock / webhook dedupe
   -> webhook / pull 同步增量数据
   -> health_metric_events 标准化指标
   -> dashboard / trends / AI / reports
@@ -45,6 +46,7 @@ Mobile App
 
 - 不使用非官方 Garmin Connect 抓取、模拟登录或第三方逆向库。
 - 不把 Garmin 数据直接写入业务卡片表；先进入标准化指标事件，再由聚合层消费。
+- 不把 Garmin access token / refresh token 存入 Redis；token 必须加密落 PostgreSQL 或专用密钥存储。
 
 ## 4. 内部 API 设计
 
@@ -121,7 +123,27 @@ healthguard://devices/garmin/connected
 
 token 必须加密存储，不写日志，不返回给客户端。
 
-## 7. 前端体验
+## 7. Redis 缓存与同步协调
+
+### Next
+
+Redis 在 Garmin 接入中主要解决短期状态、并发控制和热点状态读取，不作为设备数据权威存储。
+
+| 场景 | Redis Key | TTL | 说明 |
+|---|---|---|---|
+| OAuth state | `oauth:garmin:state:{state}` | 10 分钟 | connect 时写入，callback 校验后删除，防止 CSRF 和重复回调。 |
+| 连接状态缓存 | `health:device:connections:{userId}` | 5 分钟 | 我的页和设备页读取，连接、断开、同步状态变化后删除。 |
+| backfill 同步锁 | `lock:garmin:sync:{providerUserId}` | 5-10 分钟 | 防止用户重复点击或任务重复触发同一时间段补拉。 |
+| webhook 去重 | `dedupe:garmin:webhook:{eventDigest}` | 24 小时 | 防止重复 webhook 导致指标重复入库。 |
+| 同步限流 | `rate-limit:garmin:sync:{userId}` | 窗口期 | 限制手动同步频率，避免触发 Garmin API 限制。 |
+
+缓存失效要求：
+
+- 授权成功、断开授权、token 刷新失败、同步状态变化后，删除 `health:device:connections:{userId}`。
+- backfill 或 webhook 写入 `health_metric_events` 后，删除受影响用户的趋势、首页、报告和 AI 建议缓存。
+- Redis 不可用时，OAuth callback 不能跳过 state 校验；如果 state 存储不可用，应拒绝授权并提示稍后重试。普通连接状态缓存和同步锁失败则降级为数据库路径与数据库唯一约束兜底。
+
+## 8. 前端体验
 
 入口：`我的 -> 设备与数据源 -> Garmin`。
 
@@ -133,7 +155,7 @@ token 必须加密存储，不写日志，不返回给客户端。
 - 同步失败：展示失败原因和重试入口。
 - 无数据：说明需先在 Garmin Connect 完成设备同步。
 
-## 8. 隐私与合规
+## 9. 隐私与合规
 
 - 授权前必须说明同步范围和用途。
 - 用户可随时断开授权。
@@ -141,21 +163,24 @@ token 必须加密存储，不写日志，不返回给客户端。
 - 不将 Garmin 数据用于训练外部 AI / LLM。
 - 家庭共享 Garmin 数据必须再次经过用户授权。
 
-## 9. 失败与重试
+## 10. 失败与重试
 
 - OAuth state 校验失败：拒绝连接。
 - token 过期：尝试 refresh，失败后标记为 `reauth_required`。
 - Garmin 数据延迟：保留旧数据并提示最近同步时间。
 - webhook 重复：基于 provider、source_record_id、metric_type、recorded_at 去重。
 - backfill 失败：写入 `device_sync_logs`，允许用户或任务重试。
+- Redis 同步锁未获取：返回“同步进行中”或忽略重复任务，不创建新的 backfill。
+- Redis 去重标记已存在：webhook 返回成功或幂等结果，不重复写指标事件。
 
-## 10. 实施步骤
+## 11. 实施步骤
 
 1. 申请 Garmin Connect Developer Program 并确认 Health API 权限。
 2. 配置 OAuth redirect URI、webhook endpoint、签名校验方式。
-3. 新增设备连接表与同步日志表。
-4. 实现 OAuth 授权、callback、断开连接。
-5. 实现 backfill 和 webhook 数据标准化。
-6. 将 Garmin 指标接入数据趋势和仪表盘。
-7. 将睡眠、压力、Body Battery 接入 AI 建议。
-8. 增加同步失败、断权、空数据的 QA 用例。
+3. 配置 Redis `oauth state`、同步锁、webhook 去重和连接状态缓存。
+4. 新增设备连接表与同步日志表。
+5. 实现 OAuth 授权、callback、断开连接。
+6. 实现 backfill 和 webhook 数据标准化。
+7. 将 Garmin 指标接入数据趋势和仪表盘。
+8. 将睡眠、压力、Body Battery 接入 AI 建议。
+9. 增加同步失败、断权、空数据、重复 webhook、Redis 降级的 QA 用例。

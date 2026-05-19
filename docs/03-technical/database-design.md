@@ -60,7 +60,55 @@
 - 健康分：由服务层基于蛋白质、膳食纤维、运动消耗、热量平衡计算。
 - 仪表盘：组合档案、日汇总、卡片指标和 AI 洞察文案。
 
-## 4. Next 推荐表
+## 4. Redis 缓存设计
+
+### Next
+
+Redis 是缓存中间件，不替代 PostgreSQL 表结构。所有健康数据、用户授权、设备 token、同步日志和 AI 建议状态仍以数据库为权威来源。
+
+### Key 命名规范
+
+- 统一前缀：`health:`，系统级短期状态可用 `oauth:`、`lock:`、`rate-limit:`。
+- 用户数据 key 必须包含 `userId`。
+- 日期统一使用 `YYYY-MM-DD`，时间范围使用 ISO 日期或已规范化的 `from/to`。
+- 参数较长时可对规范化参数做 hash，但文档和日志中仍需保留可排查的业务维度。
+
+### 缓存清单
+
+| Key | 内容 | TTL | 来源 | 失效规则 |
+|---|---|---|---|---|
+| `health:profile:{userId}` | 当前用户档案 | 10 分钟 | `user_profiles` | 档案 upsert |
+| `health:profile-center:{userId}` | 我的页聚合资料 | 5 分钟 | 档案、目标、设备、报告 | 档案、设备、报告变化 |
+| `health:summary:{userId}:{date}` | 日汇总 | 5 分钟 | 饮食、运动、饮水、睡眠、指标事件 | 对应日期记录变化 |
+| `health:dashboard:{userId}:{date}` | 今日仪表盘响应 | 1-2 分钟 | 档案、日汇总、AI 洞察 | 档案或当日数据变化 |
+| `health:history:{type}:{userId}:{from}:{to}:{limit}` | 记录历史列表 | 2 分钟 | 各记录表 | 对应类型记录变化 |
+| `health:trends:{userId}:{metric}:{period}:{from}:{to}` | 趋势聚合结果 | 10 分钟 | `health_metric_events` / 日汇总 | 指标事件或 backfill 写入 |
+| `health:ai:recommendations:{userId}:{date}` | 今日建议列表 | 5 分钟 | `ai_recommendations` / 规则引擎 | 建议动作或指标变化 |
+| `health:report:{userId}:{period}:{start}:{end}` | 报告摘要 | 30 分钟 | 汇总、趋势、建议 | 周期内数据变化 |
+| `health:device:connections:{userId}` | 设备连接状态 | 5 分钟 | `connected_devices` / `device_sync_logs` | 连接、断开、同步状态变化 |
+| `oauth:garmin:state:{state}` | Garmin OAuth state | 10 分钟 | 授权发起流程 | callback 成功或过期 |
+| `lock:garmin:sync:{providerUserId}` | 同步分布式锁 | 5-10 分钟 | backfill / webhook | 同步结束或 TTL 过期 |
+| `dedupe:garmin:webhook:{eventDigest}` | webhook 去重标记 | 24 小时 | Garmin webhook | TTL 过期 |
+| `rate-limit:{scope}:{identifier}` | 登录、验证码、同步限流 | 窗口期 | 业务请求 | TTL 过期 |
+
+### 写入后的失效策略
+
+- 档案更新：删除 `profile`、`profile-center`、当日 `dashboard`。
+- 饮食 / 运动 / 饮水 / 睡眠写入：删除对应日期 `summary`、`dashboard`、对应类型 `history`、受影响周期 `trends`、`report` 和 `ai recommendations`。
+- 手动指标写入：删除对应指标趋势、当日首页、报告和 AI 建议缓存。
+- Garmin backfill / webhook：按写入指标的用户、日期范围、指标类型删除趋势、首页、报告、AI 建议和设备连接状态缓存。
+- AI 建议动作：删除或更新当日建议缓存。
+- 报告重新生成：删除同周期报告缓存。
+
+### 降级与一致性
+
+- 缓存读取失败：跳过缓存，继续查询 PostgreSQL。
+- 缓存写入失败：返回业务结果，并记录 warning。
+- 缓存失效失败：不回滚数据库事务，但需要暴露日志和后续重试观察点。
+- 首期采用主动删除 + 短 TTL 保证最终一致，不引入复杂的缓存索引表。
+- Redis 不保存 Garmin token、refresh token 明文、诊疗级敏感信息或报告文件本体。
+
+## 5. Next 推荐表
 
 ### `water_records`
 
@@ -157,7 +205,7 @@ Garmin 常见 `metric_type` 映射方向：
 - `status`
 - `created_at`
 
-## 5. Future 表方向
+## 6. Future 表方向
 
 ### Garmin / 设备接入
 
@@ -196,6 +244,8 @@ Next 阶段优先把 Garmin 接入落在以下表上：
 - `error_message`
 - `raw_payload_digest`
 
+Redis 在 Garmin 接入中只承担 OAuth state、同步锁、webhook 去重和连接状态短缓存；`connected_devices` 与 `device_sync_logs` 仍是排查授权和同步问题的权威记录。
+
 ### 家庭共享
 
 - `family_groups`
@@ -221,7 +271,7 @@ Next 阶段优先把 Garmin 接入落在以下表上：
 
 核心要求：权益控制应和报告、AI 深度建议、家庭高级共享解耦。
 
-## 6. Companion Context 持久化边界
+## 7. Companion Context 持久化边界
 
 如需持久化 companion context，推荐以用户上下文记录承载：
 
@@ -230,9 +280,10 @@ Next 阶段优先把 Garmin 接入落在以下表上：
 
 字段、评分范围和摘要语义以 [../reference/companion-context.md](../reference/companion-context.md) 为准。不得引入宠物病历、疫苗、用药、诊断等宠物健康表。
 
-## 7. 迁移建议
+## 8. 迁移建议
 
 - 短期保留当前 SQL 草案作为第一阶段 schema。
 - 后续按模块新增迁移，避免一次性创建远期所有表。
 - 对 `user_id + recorded_on/recorded_at` 高频查询建立复合索引。
 - 数值指标使用 `NUMERIC` 或明确精度，趋势查询可按日物化汇总。
+- Redis 引入不需要数据库迁移，但需要在部署环境新增 Redis 实例、连接配置、健康检查和监控指标。
