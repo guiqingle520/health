@@ -56,7 +56,7 @@
 - P0：登录、建档、鉴权、首页、饮食/运动记录、日汇总、基础测试。
 - P1：底部导航、记录中心、数据趋势、AI 建议、报告与分享、通知提醒和目标设定、我的页、报告摘要。
 - P2：Garmin Health API 接入、设备指标标准化。
-- P3：家庭共享、Pro 会员、多厂商设备、医生/顾问视图。
+- P3：家庭共享、Pro 会员、多厂商设备、医生/顾问视图、隐私数据权利、运营后台。
 
 ## 4. 每周开发计划
 
@@ -231,8 +231,8 @@
 | 维度 | 计划 |
 |---|---|
 | 目标 | 建立家庭共享一期基础。 |
-| 前端 | 我的页家人健康、邀请、成员列表、共享范围入口。 |
-| 后端 | family_groups、family_members、sharing_permissions 初版。 |
+| 前端 | 我的页家人健康、邀请、成员列表、共享范围入口；Web 家庭共享管理台参考 `UI/web-family-share.svg`。 |
+| 后端 | 按 [家庭共享完整方案](./family-sharing-development.md) 建立 `family_groups`、`family_members`、`family_invitations`、`family_share_permissions` 初版。 |
 | 测试/文档 | 授权范围、成员退出、权限拒绝测试。 |
 | 交付物 | 家庭共享模型和入口。 |
 | 验收 | 用户能邀请家人并设置基础共享范围。 |
@@ -242,8 +242,8 @@
 | 维度 | 计划 |
 |---|---|
 | 目标 | 共享数据按授权范围可控。 |
-| 前端 | 家庭成员健康摘要和权限说明。 |
-| 后端 | 仪表盘、报告、提醒等共享读接口权限过滤。 |
+| 前端 | 家庭成员健康摘要、权限说明、撤销确认和访问日志入口。 |
+| 后端 | 仪表盘、报告、提醒等共享读接口权限过滤；补齐 `family_access_logs` 和撤销后的缓存失效。 |
 | 测试/文档 | 越权访问、撤销授权、审计记录测试。 |
 | 交付物 | 家庭共享一期可验收版本。 |
 | 验收 | 未授权数据不可见，撤销后立即失效。 |
@@ -253,8 +253,8 @@
 | 维度 | 计划 |
 |---|---|
 | 目标 | 建立商业化能力骨架。 |
-| 前端 | Pro 入口、权益说明、深度报告入口占位。 |
-| 后端 | subscriptions、entitlements 或等价权益模型设计；报告权限校验。 |
+| 前端 | Pro 入口、权益说明、深度报告入口占位；Web Pro 工作台参考 `UI/web-pro-ecosystem.svg`。 |
+| 后端 | 按 [Pro 会员与商业化开发设计方案](./pro-commercialization-development.md) 建立 subscriptions、entitlements、payments、invoices 或等价权益模型；报告权限校验。 |
 | 测试/文档 | 权益开关、未开通提示、报告权限测试。 |
 | 交付物 | Pro 权益骨架。 |
 | 验收 | Pro 权益不侵入普通功能，权限控制可配置。 |
@@ -264,8 +264,8 @@
 | 维度 | 计划 |
 |---|---|
 | 目标 | 为后续多设备和医生/顾问场景做预留。 |
-| 前端 | 设备与数据源支持 provider 列表占位；医生/顾问授权入口占位。 |
-| 后端 | device provider 抽象、metric mapping 扩展点、共享审计补强。 |
+| 前端 | 设备与数据源支持 provider 列表占位；医生/顾问授权入口、隐私授权总览和后台工作台占位。 |
+| 后端 | 按 [多厂商设备生态开发设计方案](./multi-provider-devices-development.md)、[医生 / 健康顾问视图开发设计方案](./care-provider-workbench-development.md) 和 [隐私安全与数据权利开发设计方案](./privacy-data-rights-development.md) 补齐 provider 抽象、metric mapping、授权审计和撤销能力。 |
 | 测试/文档 | 多 provider mock、设备断开、权限回归。 |
 | 交付物 | 扩展生态预研版本和下一阶段 backlog。 |
 | 验收 | 新设备厂商接入不需要重写趋势和指标消费链路。 |
@@ -341,9 +341,19 @@
 ### Iteration 6 - 家庭、Pro 与生态扩展
 
 - 周期：Sprint 7-8，第 15-18 周。
-- 家庭共享先做邀请和授权范围。
-- Pro 会员只控制权益，不耦合业务实现。
-- 多厂商设备只做接口和数据模型预留。
+- 家庭共享按 [家庭共享完整方案](./family-sharing-development.md) 先做邀请、授权范围、撤销和访问审计。
+- Pro 会员按 [Pro 会员与商业化开发设计方案](./pro-commercialization-development.md) 控制权益，不耦合基础业务实现。
+- 多厂商设备按 [多厂商设备生态开发设计方案](./multi-provider-devices-development.md) 做 provider 抽象、标准化指标和默认数据源。
+- 医生/顾问视图按 [医生 / 健康顾问视图开发设计方案](./care-provider-workbench-development.md) 只允许用户授权访问。
+- 运营后台按 [组织管理端 / 运营后台开发设计方案](./admin-operations-development.md) 先覆盖模板、权益、专家服务和审计。
+- 隐私数据权利按 [隐私安全与数据权利开发设计方案](./privacy-data-rights-development.md) 统一授权总览、撤销、访问日志、数据导出和账号注销。
+
+### Iteration 9 - AI 高阶能力
+
+- 周期：Future，基础 AI 建议和报告 MVP 稳定后。
+- 按 [AI 高阶能力开发设计方案](./advanced-ai-development.md) 增加拍照识别饮食、自然语言记录、深度报告、建议解释和安全审核。
+- 生成内容必须结构化保存，用户确认后才写入正式记录。
+- 验收：AI 草稿可确认，建议能解释来源，高风险输出被阻断。
 
 ## 6. 前端设计要求
 

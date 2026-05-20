@@ -35,6 +35,13 @@
 7. [健康档案 / 用药管理 / 体检报告开发方案](./03-technical/health-profile-subfeatures-development.md)
 8. [国际化开发设计方案](./03-technical/i18n-development.md)
 9. [Garmin 设备接入设计](./03-technical/garmin-integration.md)
+10. [家庭共享完整方案](./03-technical/family-sharing-development.md)
+11. [Pro 会员与商业化开发设计方案](./03-technical/pro-commercialization-development.md)
+12. [医生 / 健康顾问视图开发设计方案](./03-technical/care-provider-workbench-development.md)
+13. [组织管理端 / 运营后台开发设计方案](./03-technical/admin-operations-development.md)
+14. [多厂商设备生态开发设计方案](./03-technical/multi-provider-devices-development.md)
+15. [AI 高阶能力开发设计方案](./03-technical/advanced-ai-development.md)
+16. [隐私安全与数据权利开发设计方案](./03-technical/privacy-data-rights-development.md)
 
 ### 测试与验收
 
@@ -52,15 +59,15 @@
 - 数据层：PostgreSQL SQL 草案与 Repository 已覆盖用户、档案、refresh token、饮食记录、运动记录。
 - 缓存层：Next 阶段引入 Redis 作为缓存中间件，承担热点读缓存、OAuth state、限流、Garmin 同步锁和 webhook 去重；PostgreSQL 仍是健康数据权威存储。
 - 国际化：Next 阶段支持 `zh-Hans`、`zh-Hant`、`en`、`ja`、`ko`，并以资源文件和 locale allowlist 支持后续扩展。
-- UI 原型：`UI/` 目录包含 App 主流程、数据趋势、AI 建议、我的页、基本信息编辑页、健康档案扩展页、语言设置页，以及 Web 工作台原型。
+- UI 原型：`UI/` 目录包含 App 主流程、数据趋势、AI 建议、我的页、健康档案扩展页、语言设置页，以及 Web 记录、趋势、AI、报告、家庭、Pro、医生/顾问、设备生态、隐私和运营后台工作台原型。
 
 ## 阶段路线
 
 - Phase 1 MVP：登录、建档、饮食/运动记录、日汇总、首页仪表盘。
 - Phase 2 近期增强：数据趋势、AI 建议、饮水/睡眠/用药、报告导出、个人中心完善、国际化、Redis 热点缓存。
-- Phase 3 智能化：AI 饮食识别、自然语言记录、周报/月报、companion context 汇总。
-- Phase 4 家庭与设备生态：家庭共享、Garmin 等可穿戴设备接入、医生/健康顾问视图、设备同步锁与去重。
-- Phase 5 商业化：Pro 会员、深度报告、专家服务、组织管理端。
+- Phase 3 智能化：AI 饮食识别、自然语言记录、深度报告、建议解释、安全审核、companion context 汇总。
+- Phase 4 家庭与设备生态：家庭共享、Garmin 与多厂商设备接入、医生/健康顾问视图、设备同步锁与去重。
+- Phase 5 商业化与治理：Pro 会员、深度报告、专家服务、组织管理端、隐私数据权利。
 
 ## 建议开发周期
 

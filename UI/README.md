@@ -26,13 +26,24 @@
 - `web-login.svg`：Web 登录页
 - `web-onboarding.svg`：Web 建档页
 - `web-dashboard.svg`：Web 今日健康仪表盘
+- `web-records.svg`：Web 记录中心页
+- `web-data-trends.svg`：Web 数据趋势页
+- `web-ai-advice.svg`：Web AI 建议与高阶能力页
+- `web-report-share.svg`：Web 报告与分享页
 - `web-notification-goals.svg`：Web 通知提醒和目标设定页
+- `web-family-share.svg`：Web 家庭共享管理页
+- `web-pro-ecosystem.svg`：Web Pro 会员与商业化页
+- `web-care-provider.svg`：Web 医生 / 健康顾问工作台
+- `web-admin-operations.svg`：Web 组织管理端 / 运营后台
+- `web-devices-ecosystem.svg`：Web 多厂商设备生态页
+- `web-privacy-rights.svg`：Web 隐私安全与数据权利页
 
 ## 设计覆盖
 
 - 主路径：登录、建档、仪表盘
-- 功能页：数据趋势、AI 健康建议、我的 / 个人中心
+- 功能页：记录中心、数据趋势、AI 健康建议、报告与分享、我的 / 个人中心
 - 设置页：通知提醒和目标设定、语言与单位
+- 生态页：家庭共享、Pro 商业化、医生/顾问、多厂商设备、隐私数据权利、运营后台
 - 视觉基调：蓝绿主色、清爽可信、轻医疗感
 - 组件风格：卡片式布局、大按钮、大字号表单、清晰分区
 - Companion context：以“陪伴摘要 / 陪伴上下文”形式附着在仪表盘和 AI 洞察中，不作为独立宠物业务入口
@@ -54,3 +65,7 @@ App 端已统一采用用户功能页参考图的视觉语言：深绿机身边�
 ## 开发计划扩展页
 
 根据 `docs/03-technical/development-plan.md` 的 18 周开发计划，补充记录中心、健康报告、Garmin 接入、家庭共享、Pro 会员与设备生态预留等页面，用于第 6-18 周开发评审。
+
+## Web 工作台扩展页
+
+根据远期模块专项方案补齐 Web 原型：记录中心、数据趋势、AI 高阶能力、报告分享、家庭共享、Pro 商业化、医生/顾问工作台、运营后台、多设备生态和隐私数据权利。

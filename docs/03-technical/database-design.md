@@ -409,26 +409,99 @@ Redis 在 Garmin 接入中只承担 OAuth state、同步锁、webhook 去重和�
 
 - `family_groups`
 - `family_members`
-- `sharing_permissions`
-- `sharing_audit_logs`
+- `family_invitations`
+- `family_share_permissions`
+- `family_access_logs`
 
 核心要求：所有共享数据必须可撤销、可审计，并按授权范围过滤。
 
+详细方案见 [家庭共享完整方案](./family-sharing-development.md)。
+
 ### 多厂商设备生态
 
+- `device_providers`
 - `connected_devices`
 - `device_sync_logs`
 - `device_metric_mappings`
+- `device_provider_capabilities`
+- `device_source_preferences`
 
 核心要求：设备数据必须保留来源、同步时间和去重标识。
 
+详细方案见 [多厂商设备生态开发设计方案](./multi-provider-devices-development.md)。
+
 ### Pro 会员
 
+- `products`
+- `plans`
 - `subscriptions`
 - `entitlements`
+- `payments`
+- `invoices`
 - `expert_service_orders`
 
 核心要求：权益控制应和报告、AI 深度建议、家庭高级共享解耦。
+
+详细方案见 [Pro 会员与商业化开发设计方案](./pro-commercialization-development.md)。
+
+### 医生 / 健康顾问视图
+
+- `care_organizations`
+- `care_provider_profiles`
+- `care_authorizations`
+- `care_authorization_scopes`
+- `care_notes`
+- `care_access_logs`
+
+核心要求：医生/顾问只能访问用户主动授权的数据，所有查看行为必须可审计。
+
+详细方案见 [医生 / 健康顾问视图开发设计方案](./care-provider-workbench-development.md)。
+
+### 组织管理端 / 运营后台
+
+- `admin_users`
+- `admin_roles`
+- `admin_role_permissions`
+- `admin_audit_logs`
+- `report_templates`
+- `report_template_versions`
+- `ai_content_templates`
+- `promotion_codes`
+- `manual_entitlement_grants`
+- `support_tickets`
+
+核心要求：后台操作按角色授权，敏感数据访问必须写入审计日志。
+
+详细方案见 [组织管理端 / 运营后台开发设计方案](./admin-operations-development.md)。
+
+### AI 高阶能力
+
+- `ai_jobs`
+- `ai_inputs`
+- `ai_outputs`
+- `ai_safety_events`
+- `food_recognition_results`
+- `natural_language_record_drafts`
+- `ai_recommendation_reasons`
+- `ai_feedback_events`
+
+核心要求：AI 生成结果必须结构化、可解释、可安全审核，并由用户确认后写入正式记录。
+
+详细方案见 [AI 高阶能力开发设计方案](./advanced-ai-development.md)。
+
+### 隐私安全与数据权利
+
+- `privacy_consents`
+- `data_export_jobs`
+- `account_deletion_requests`
+- `authorization_registry`
+- `user_access_logs`
+- `sensitive_data_access_logs`
+- `data_retention_policies`
+
+核心要求：授权撤销后立即失效，数据导出和注销流程可追踪。
+
+详细方案见 [隐私安全与数据权利开发设计方案](./privacy-data-rights-development.md)。
 
 ## 9. Companion Context 持久化边界
 

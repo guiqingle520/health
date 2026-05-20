@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024" role="img" aria-labelledby="title desc">
+<title id="title">Web 医生 / 健康顾问工作台</title><desc id="desc">HealthGuard care provider workbench prototype.</desc>
+<style>text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;letter-spacing:0}.muted{fill:#61727B}.ink{fill:#173844}.teal{fill:#087B83}.label{font-size:14px;font-weight:800}.small{font-size:13px}.h1{font-size:30px;font-weight:900}.h2{font-size:18px;font-weight:900}.num{font-size:28px;font-weight:900}.line{stroke:#DCE9E6;stroke-width:1}</style>
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#12343C" flood-opacity="0.10"/></filter></defs>
+<rect width="1440" height="1024" fill="#F4FAF8"/>
+<rect x="40" y="36" width="222" height="952" rx="24" fill="#FFFFFF" filter="url(#shadow)"/>
+<circle cx="82" cy="88" r="22" fill="#DDF5EF"/><path d="M72 88h20M82 78v20" stroke="#15A3A3" stroke-width="3" stroke-linecap="round"/><text x="116" y="84" class="ink" font-size="22" font-weight="900">HealthGuard</text><text x="116" y="108" class="muted small">顾问工作台</text>
+<rect x="62" y="140" width="156" height="42" rx="12" fill="#F3FBF9"/><circle cx="84" cy="161" r="6" fill="#15A3A3"/><text x="104" y="166" class="teal label">授权用户</text>
+<text x="104" y="224" class="muted label">报告查看</text><circle cx="84" cy="219" r="6" fill="#DCE9E6"/>
+<text x="104" y="282" class="muted label">备注反馈</text><circle cx="84" cy="277" r="6" fill="#DCE9E6"/>
+<text x="104" y="340" class="muted label">授权日志</text><circle cx="84" cy="335" r="6" fill="#DCE9E6"/>
+<text x="300" y="88" class="muted small">医生 / 健康顾问视图</text><text x="300" y="128" class="ink h1">授权健康报告查看</text>
+<rect x="1110" y="76" width="124" height="40" rx="14" fill="#FFFFFF" stroke="#DCE9E6"/><text x="1172" y="101" text-anchor="middle" class="teal label">授权范围</text>
+<rect x="1252" y="76" width="132" height="40" rx="14" fill="#15A3A3"/><text x="1318" y="101" text-anchor="middle" fill="#FFFFFF" class="label">新增反馈</text>
+<rect x="300" y="164" width="340" height="768" rx="22" fill="#FFFFFF" filter="url(#shadow)"/><text x="330" y="204" class="ink h2">授权用户列表</text>
+<rect x="330" y="234" width="280" height="86" rx="18" fill="#F3FBF9"/><text x="356" y="268" class="ink label">张先生</text><text x="356" y="294" class="muted small">报告、趋势、目标 / 30 天</text><text x="540" y="268" class="teal small">待反馈</text>
+<rect x="330" y="342" width="280" height="86" rx="18" fill="#FFFFFF" stroke="#DCE9E6"/><text x="356" y="376" class="ink label">李女士</text><text x="356" y="402" class="muted small">仅月报 / 7 天后过期</text><text x="540" y="376" fill="#D8792A" class="small">即将到期</text>
+<rect x="330" y="450" width="280" height="86" rx="18" fill="#FFFFFF" stroke="#DCE9E6"/><text x="356" y="484" class="ink label">王先生</text><text x="356" y="510" class="muted small">报告、用药摘要 / 长期</text><text x="540" y="484" class="muted small">已反馈</text>
+<text x="330" y="594" class="ink h2">筛选</text><rect x="330" y="626" width="128" height="38" rx="12" fill="#15A3A3"/><text x="394" y="650" text-anchor="middle" fill="#FFFFFF" class="small">待查看</text><rect x="474" y="626" width="128" height="38" rx="12" fill="#FFFFFF" stroke="#DCE9E6"/><text x="538" y="650" text-anchor="middle" class="teal small">即将到期</text>
+<rect x="672" y="164" width="440" height="768" rx="22" fill="#FFFFFF" filter="url(#shadow)"/><text x="702" y="204" class="ink h2">报告与趋势摘要</text><text x="702" y="236" class="muted small">张先生 / 授权至 2026-06-19 / 不允许导出</text>
+<rect x="702" y="272" width="174" height="106" rx="18" fill="#F3FBF9"/><text x="728" y="306" class="muted label">健康分</text><text x="728" y="346" class="ink num">82</text>
+<rect x="902" y="272" width="174" height="106" rx="18" fill="#FFF7ED"/><text x="928" y="306" class="muted label">异常提示</text><text x="928" y="346" class="ink num">2</text>
+<text x="702" y="430" class="ink h2">报告摘要</text><rect x="702" y="460" width="374" height="128" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/><text x="728" y="498" class="ink label">本月运动频次提升，体重持续下降；睡眠入睡时间偏晚。</text><text x="728" y="532" class="muted small">仅供健康管理参考，不构成诊断或处方建议。</text>
+<text x="702" y="642" class="ink h2">趋势重点</text><text x="702" y="680" class="muted small">体重：-1.0kg / 7 天</text><text x="702" y="718" class="muted small">静息心率：连续 2 天偏高</text><text x="702" y="756" class="muted small">饮水：目标达成 78%</text>
+<rect x="1142" y="164" width="242" height="768" rx="22" fill="#FFFFFF" filter="url(#shadow)"/><text x="1172" y="204" class="ink h2">备注反馈</text>
+<rect x="1172" y="236" width="182" height="178" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/><text x="1190" y="270" class="ink label">反馈草稿</text><text x="1190" y="304" class="muted small">建议本周优先稳定</text><text x="1190" y="330" class="muted small">入睡时间，运动强度</text><text x="1190" y="356" class="muted small">暂不继续增加。</text>
+<rect x="1172" y="448" width="182" height="44" rx="14" fill="#15A3A3"/><text x="1263" y="476" text-anchor="middle" fill="#FFFFFF" class="label">发送反馈</text>
+<text x="1172" y="548" class="ink h2">安全边界</text><text x="1172" y="584" class="muted small">不输出诊断</text><text x="1172" y="616" class="muted small">不输出处方</text><text x="1172" y="648" class="muted small">不允许反向搜索用户</text><rect x="1172" y="724" width="182" height="54" rx="16" fill="#173844"/><text x="1263" y="758" text-anchor="middle" fill="#FFFFFF" class="label">查看访问日志</text>
+</svg>

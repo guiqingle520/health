@@ -16,6 +16,7 @@ Web 端不是移动端的简单放大，而是面向桌面场景的健康工作�
 - `web-medication-management.svg`
 - `web-exam-report.svg`
 - `web-language-settings.svg`
+- `web-notification-goals.svg`
 
 ## 3. 信息架构
 
@@ -34,23 +35,38 @@ Web 端不是移动端的简单放大，而是面向桌面场景的健康工作�
 - 报告与分享页：报告摘要、导出、分享状态、撤销分享。
 - 通知提醒与目标设定页：提醒开关、静默时间、目标列表、目标编辑。
 - 语言与单位设置页：语言选择、locale 展示、单位偏好、保存操作区。
+- 家庭共享管理：成员、共享范围、访问日志、撤销操作。
+- Pro 与商业化：权益、订阅、账单、深度报告、专家服务。
+- 设备生态：provider 状态、指标覆盖、同步日志、默认数据源。
+- 隐私数据权利：授权总览、访问日志、导出任务、账号注销。
 
 ### Future
 
-- 用户管理。
-- 报告中心。
-- 家庭共享管理。
-- 医生/顾问工作台。
-- 运营配置：报告模板、AI 建议模板、Pro 权益。
+- 医生/顾问工作台：授权用户列表、报告查看、备注反馈。
+- 运营后台：用户支持、报告模板、AI 建议模板、Pro 权益、专家服务、审计日志。
+- AI 高阶能力：拍照识别草稿、自然语言记录草稿、建议解释、安全审核。
 
-## 4. 设计原则
+## 4. 原型索引
+
+- `UI/web-records.svg`
+- `UI/web-data-trends.svg`
+- `UI/web-ai-advice.svg`
+- `UI/web-report-share.svg`
+- `UI/web-family-share.svg`
+- `UI/web-pro-ecosystem.svg`
+- `UI/web-care-provider.svg`
+- `UI/web-admin-operations.svg`
+- `UI/web-devices-ecosystem.svg`
+- `UI/web-privacy-rights.svg`
+
+## 5. 设计原则
 
 - 桌面端强调扫描、比较和批量管理。
 - 不做营销式大 Hero，优先工作台信息密度。
 - 侧边导航用于模块切换。
 - 核心数据卡片支持日期筛选和详情钻取。
 
-## 5. 与移动端关系
+## 6. 与移动端关系
 
 - 移动端：用户日常记录和查看。
 - Web 端：报告、管理、协作、长周期分析。
