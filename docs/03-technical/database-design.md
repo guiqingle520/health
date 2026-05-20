@@ -4,6 +4,11 @@
 
 数据库需要支撑用户身份、健康档案、健康记录、日汇总、趋势分析、AI 建议、报告、家庭共享和设备接入。当前阶段优先保证 MVP 数据闭环稳定，后续逐步扩展。
 
+统一时间字段约定：
+
+- 所有业务主表默认包含 `created_at` 和 `updated_at`。
+- `recorded_on` / `recorded_at` 只表示业务发生日期或时间，不替代审计字段。
+
 ## 2. Current 表结构
 
 当前 SQL 草案位于 `apps/backend/sql/m1_m2_schema.sql`。
@@ -13,6 +18,7 @@
 - `id UUID PRIMARY KEY`
 - `phone VARCHAR(20) UNIQUE`
 - `created_at TIMESTAMPTZ`
+- `updated_at TIMESTAMPTZ`
 
 ### `user_profiles`
 
@@ -23,13 +29,15 @@
 - `height_cm`
 - `weight_kg`
 - `goal`
+- `created_at`
 - `updated_at`
 
 ### `auth_refresh_tokens`
 
 - `user_id UUID PRIMARY KEY`
 - `refresh_token`
-- `issued_at`
+- `created_at`
+- `updated_at`
 
 ### `diet_records`
 
@@ -40,6 +48,7 @@
 - `recorded_on`
 - 营养字段：`calories`、`carbs`、`protein`、`fat`、`fiber`、`sodium_mg`、`calcium_mg`、`iron_mg`、`vitamin_a_mcg`、`vitamin_c_mg`、`vitamin_d_iu`
 - `created_at`
+- `updated_at`
 - 索引：`idx_diet_records_user_date`
 
 ### `exercise_records`
@@ -51,6 +60,7 @@
 - `calories_burned`
 - `recorded_on`
 - `created_at`
+- `updated_at`
 - 索引：`idx_exercise_records_user_date`
 
 ## 3. Current 聚合策略
@@ -120,6 +130,7 @@ Redis 是缓存中间件，不替代 PostgreSQL 表结构。所有健康数据�
 - `recorded_at`
 - `source`
 - `created_at`
+- `updated_at`
 
 ### `sleep_records`
 
@@ -133,6 +144,41 @@ Redis 是缓存中间件，不替代 PostgreSQL 表结构。所有健康数据�
 - `sleep_score`
 - `source`
 - `created_at`
+- `updated_at`
+
+### `notification_settings`
+
+用于饮水、运动、睡眠、周报和目标提醒。
+
+- `user_id`
+- `water_enabled`
+- `exercise_enabled`
+- `sleep_enabled`
+- `weekly_report_enabled`
+- `goal_reminder_enabled`
+- `quiet_hours_enabled`
+- `quiet_hours_start`
+- `quiet_hours_end`
+- `created_at`
+- `updated_at`
+
+### `health_goals`
+
+用于目标设定和提醒。
+
+- `id`
+- `user_id`
+- `goal_type`
+- `target_value`
+- `unit`
+- `period`
+- `start_date`
+- `end_date`
+- `reminder_enabled`
+- `status`
+- `source`
+- `created_at`
+- `updated_at`
 
 ### `medication_reminders`
 
@@ -161,6 +207,7 @@ Redis 是缓存中间件，不替代 PostgreSQL 表结构。所有健康数据�
 - `source_record_id`
 - `metadata`
 - `created_at`
+- `updated_at`
 
 Garmin 常见 `metric_type` 映射方向：
 
@@ -204,8 +251,118 @@ Garmin 常见 `metric_type` 映射方向：
 - `file_url`
 - `status`
 - `created_at`
+- `updated_at`
 
-## 6. Future 表方向
+### `report_shares`
+
+用于报告分享、医生共享和家人分享。
+
+- `id`
+- `report_id`
+- `owner_user_id`
+- `shared_with_type`
+- `shared_with_value`
+- `permission`
+- `share_token`
+- `expires_at`
+- `created_at`
+- `updated_at`
+
+## 6. 健康档案扩展表
+
+### `health_profile_details`
+
+用于健康档案背景信息。
+
+- `user_id`
+- `chronic_diseases` JSONB
+- `allergies` JSONB
+- `family_history` JSONB
+- `exercise_habit`
+- `data_sources` JSONB
+- `updated_at`
+
+### `medications`
+
+用于药品计划和提醒。
+
+- `id`
+- `user_id`
+- `name`
+- `dosage`
+- `frequency`
+- `times` JSONB
+- `start_date`
+- `end_date`
+- `reminder_enabled`
+- `status`
+- `created_at`
+- `updated_at`
+
+### `medication_action_logs`
+
+用于记录已服用、稍后和跳过动作。
+
+- `id`
+- `user_id`
+- `medication_id`
+- `action`
+- `scheduled_at`
+- `acted_at`
+- `created_at`
+
+### `exam_reports`
+
+用于体检报告主表。
+
+- `id`
+- `user_id`
+- `title`
+- `exam_date`
+- `organization`
+- `source`
+- `file_url`
+- `status`
+- `abnormal_count`
+- `created_at`
+- `updated_at`
+
+### `exam_report_items`
+
+用于体检报告明细指标。
+
+- `id`
+- `exam_report_id`
+- `user_id`
+- `name`
+- `value`
+- `unit`
+- `reference_range`
+- `flag`
+- `created_at`
+- `updated_at`
+
+## 7. 国际化与偏好字段
+
+### `user_preferences`
+
+用于语言、地区和单位偏好。详细方案见 [国际化开发设计方案](./i18n-development.md)。
+
+- `user_id`
+- `locale_mode`：`system` / `manual`
+- `locale`：`zh-Hans` / `zh-Hant` / `en` / `ja` / `ko`
+- `weight_unit`
+- `height_unit`
+- `energy_unit`
+- `updated_at`
+
+旧数据兼容：
+
+- 读取旧值 `zh-CN` 时 normalize 为 `zh-Hans`。
+- 读取旧值 `zh-TW`、`zh-HK` 时 normalize 为 `zh-Hant`。
+- 写回时统一保存 canonical locale。
+
+## 8. Future 表方向
 
 ### Garmin / 设备接入
 
@@ -243,6 +400,8 @@ Next 阶段优先把 Garmin 接入落在以下表上：
 - `error_code`
 - `error_message`
 - `raw_payload_digest`
+- `created_at`
+- `updated_at`
 
 Redis 在 Garmin 接入中只承担 OAuth state、同步锁、webhook 去重和连接状态短缓存；`connected_devices` 与 `device_sync_logs` 仍是排查授权和同步问题的权威记录。
 
@@ -271,7 +430,7 @@ Redis 在 Garmin 接入中只承担 OAuth state、同步锁、webhook 去重和�
 
 核心要求：权益控制应和报告、AI 深度建议、家庭高级共享解耦。
 
-## 7. Companion Context 持久化边界
+## 9. Companion Context 持久化边界
 
 如需持久化 companion context，推荐以用户上下文记录承载：
 
@@ -280,10 +439,11 @@ Redis 在 Garmin 接入中只承担 OAuth state、同步锁、webhook 去重和�
 
 字段、评分范围和摘要语义以 [../reference/companion-context.md](../reference/companion-context.md) 为准。不得引入宠物病历、疫苗、用药、诊断等宠物健康表。
 
-## 8. 迁移建议
+## 10. 迁移建议
 
 - 短期保留当前 SQL 草案作为第一阶段 schema。
 - 后续按模块新增迁移，避免一次性创建远期所有表。
 - 对 `user_id + recorded_on/recorded_at` 高频查询建立复合索引。
 - 数值指标使用 `NUMERIC` 或明确精度，趋势查询可按日物化汇总。
+- 新增业务表默认带 `created_at` / `updated_at`，除非是明确例外的纯连接表。
 - Redis 引入不需要数据库迁移，但需要在部署环境新增 Redis 实例、连接配置、健康检查和监控指标。

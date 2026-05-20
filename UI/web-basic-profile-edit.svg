@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024" role="img" aria-labelledby="title desc">
+<title id="title">Web 基本信息编辑页</title>
+<desc id="desc">HealthGuard Web basic profile edit prototype.</desc>
+<style>text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;letter-spacing:0}</style>
+<defs>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#12343C" flood-opacity="0.10"/></filter>
+  <linearGradient id="buttonGrad" x1="0" x2="1"><stop offset="0" stop-color="#15A3A3"/><stop offset="1" stop-color="#087B83"/></linearGradient>
+</defs>
+<rect x="0" y="0" width="1440" height="1024" fill="#F4FAF8"/>
+
+<rect x="40" y="36" width="222" height="952" rx="24" fill="#FFFFFF" filter="url(#softShadow)"/>
+<circle cx="82" cy="88" r="22" fill="#DDF5EF"/>
+<path d="M72 88h20M82 78v20" stroke="#15A3A3" fill="none" stroke-width="3" stroke-linecap="round"/>
+<text x="116" y="82" font-size="22" fill="#173844" font-weight="800">HealthGuard</text>
+<text x="116" y="108" font-size="13" fill="#61727B" font-weight="600">Web 工作台</text>
+
+<rect x="62" y="140" width="156" height="42" rx="12" fill="transparent"/>
+<circle cx="84" cy="161" r="6" fill="#DCE9E6"/>
+<text x="104" y="166" font-size="15" fill="#61727B" font-weight="600">总览</text>
+<rect x="62" y="198" width="156" height="42" rx="12" fill="#F3FBF9" stroke="#DCE9E6"/>
+<circle cx="84" cy="219" r="6" fill="#15A3A3"/>
+<text x="104" y="224" font-size="15" fill="#087B83" font-weight="800">健康档案</text>
+<rect x="62" y="256" width="156" height="42" rx="12" fill="transparent"/>
+<circle cx="84" cy="277" r="6" fill="#DCE9E6"/>
+<text x="104" y="282" font-size="15" fill="#61727B" font-weight="600">记录</text>
+<rect x="62" y="314" width="156" height="42" rx="12" fill="transparent"/>
+<circle cx="84" cy="335" r="6" fill="#DCE9E6"/>
+<text x="104" y="340" font-size="15" fill="#61727B" font-weight="600">AI 洞察</text>
+<rect x="62" y="372" width="156" height="42" rx="12" fill="transparent"/>
+<circle cx="84" cy="393" r="6" fill="#DCE9E6"/>
+<text x="104" y="398" font-size="15" fill="#61727B" font-weight="600">家人共享</text>
+<rect x="62" y="430" width="156" height="42" rx="12" fill="transparent"/>
+<circle cx="84" cy="451" r="6" fill="#DCE9E6"/>
+<text x="104" y="456" font-size="15" fill="#61727B" font-weight="600">设置</text>
+<rect x="62" y="902" width="156" height="52" rx="16" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="82" y="926" font-size="13" fill="#61727B" font-weight="500">账号</text>
+<text x="82" y="948" font-size="16" fill="#173844" font-weight="800">张先生</text>
+
+<rect x="300" y="36" width="1100" height="72" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="332" y="82" font-size="26" fill="#173844" font-weight="800">基本信息</text>
+<rect x="1120" y="56" width="114" height="36" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="1177" y="79" font-size="14" fill="#61727B" font-weight="700" text-anchor="middle">取消</text>
+<rect x="1250" y="56" width="112" height="36" rx="18" fill="url(#buttonGrad)"/>
+<text x="1306" y="79" font-size="14" fill="#FFFFFF" font-weight="800" text-anchor="middle">保存修改</text>
+
+<rect x="300" y="136" width="260" height="812" rx="24" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="332" y="184" font-size="22" fill="#173844" font-weight="800">健康档案</text>
+<rect x="332" y="214" width="184" height="46" rx="14" fill="#F3FBF9" stroke="#DCE9E6"/>
+<circle cx="356" cy="237" r="6" fill="#15A3A3"/>
+<text x="376" y="242" font-size="15" fill="#087B83" font-weight="800">基本信息</text>
+<rect x="332" y="276" width="184" height="46" rx="14" fill="transparent"/>
+<circle cx="356" cy="299" r="6" fill="#DCE9E6"/>
+<text x="376" y="304" font-size="15" fill="#61727B" font-weight="700">健康目标</text>
+<rect x="332" y="338" width="184" height="46" rx="14" fill="transparent"/>
+<circle cx="356" cy="361" r="6" fill="#DCE9E6"/>
+<text x="376" y="366" font-size="15" fill="#61727B" font-weight="700">用药管理</text>
+<rect x="332" y="400" width="184" height="46" rx="14" fill="transparent"/>
+<circle cx="356" cy="423" r="6" fill="#DCE9E6"/>
+<text x="376" y="428" font-size="15" fill="#61727B" font-weight="700">体检报告</text>
+<rect x="332" y="720" width="184" height="96" rx="18" fill="#EEFBF8"/>
+<text x="356" y="756" font-size="16" fill="#173844" font-weight="800">档案完整度</text>
+<text x="356" y="786" font-size="30" fill="#087B83" font-weight="900">80%</text>
+<rect x="356" y="802" width="128" height="8" rx="4" fill="#DCE9E6"/>
+<rect x="356" y="802" width="102" height="8" rx="4" fill="#15A3A3"/>
+
+<rect x="588" y="136" width="524" height="812" rx="24" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="628" y="186" font-size="24" fill="#173844" font-weight="900">编辑基本信息</text>
+<text x="628" y="216" font-size="14" fill="#61727B" font-weight="600">保存后会刷新我的页、首页和 AI 建议上下文</text>
+
+<text x="628" y="270" font-size="14" fill="#61727B" font-weight="700">昵称</text>
+<rect x="628" y="288" width="208" height="58" rx="14" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="652" y="324" font-size="18" fill="#173844" font-weight="800">张先生</text>
+<text x="864" y="270" font-size="14" fill="#61727B" font-weight="700">性别</text>
+<rect x="864" y="288" width="208" height="58" rx="14" fill="#F8FCFB" stroke="#DCE9E6"/>
+<rect x="882" y="302" width="52" height="30" rx="15" fill="#DDF5EF"/>
+<text x="908" y="322" font-size="13" fill="#087B83" font-weight="900" text-anchor="middle">男</text>
+<text x="960" y="322" font-size="13" fill="#61727B" font-weight="700" text-anchor="middle">女</text>
+<text x="1014" y="322" font-size="13" fill="#61727B" font-weight="700" text-anchor="middle">未设</text>
+
+<text x="628" y="394" font-size="14" fill="#61727B" font-weight="700">年龄</text>
+<rect x="628" y="412" width="132" height="58" rx="14" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="652" y="448" font-size="18" fill="#173844" font-weight="800">31 岁</text>
+<text x="788" y="394" font-size="14" fill="#61727B" font-weight="700">身高</text>
+<rect x="788" y="412" width="132" height="58" rx="14" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="812" y="448" font-size="18" fill="#173844" font-weight="800">175 cm</text>
+<text x="948" y="394" font-size="14" fill="#B36D3A" font-weight="800">体重</text>
+<rect x="948" y="412" width="132" height="58" rx="14" fill="#FFF9F4" stroke="#F2D9C8"/>
+<text x="972" y="448" font-size="18" fill="#173844" font-weight="800">71.6 kg</text>
+
+<text x="628" y="518" font-size="14" fill="#61727B" font-weight="700">健康目标</text>
+<rect x="628" y="540" width="74" height="38" rx="19" fill="#DDF5EF"/>
+<text x="665" y="565" font-size="14" fill="#087B83" font-weight="900" text-anchor="middle">减脂</text>
+<rect x="714" y="540" width="74" height="38" rx="19" fill="#FFFFFF" stroke="#DCE9E6"/>
+<text x="751" y="565" font-size="14" fill="#61727B" font-weight="700" text-anchor="middle">增肌</text>
+<rect x="800" y="540" width="74" height="38" rx="19" fill="#FFFFFF" stroke="#DCE9E6"/>
+<text x="837" y="565" font-size="14" fill="#61727B" font-weight="700" text-anchor="middle">保持</text>
+<rect x="886" y="540" width="74" height="38" rx="19" fill="#FFFFFF" stroke="#DCE9E6"/>
+<text x="923" y="565" font-size="14" fill="#61727B" font-weight="700" text-anchor="middle">控糖</text>
+<rect x="972" y="540" width="88" height="38" rx="19" fill="#FFFFFF" stroke="#DCE9E6"/>
+<text x="1016" y="565" font-size="14" fill="#61727B" font-weight="700" text-anchor="middle">改善睡眠</text>
+
+<rect x="628" y="626" width="444" height="76" rx="18" fill="#EEFBF8"/>
+<circle cx="660" cy="664" r="16" fill="#DDF5EF"/>
+<text x="660" y="670" font-size="15" fill="#087B83" font-weight="900" text-anchor="middle">i</text>
+<text x="692" y="654" font-size="15" fill="#173844" font-weight="900">字段用途</text>
+<text x="692" y="680" font-size="13" fill="#61727B" font-weight="600">年龄、身高、体重和目标会影响健康分、AI 建议、报告解释。</text>
+
+<rect x="628" y="734" width="210" height="48" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="733" y="764" font-size="15" fill="#61727B" font-weight="800" text-anchor="middle">取消</text>
+<rect x="862" y="734" width="210" height="48" rx="18" fill="url(#buttonGrad)"/>
+<text x="967" y="764" font-size="15" fill="#FFFFFF" font-weight="900" text-anchor="middle">保存修改</text>
+
+<rect x="1140" y="136" width="260" height="812" rx="24" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="1172" y="184" font-size="22" fill="#173844" font-weight="900">健康上下文</text>
+<rect x="1172" y="220" width="196" height="92" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="1196" y="254" font-size="14" fill="#61727B" font-weight="700">BMI 预览</text>
+<text x="1196" y="286" font-size="30" fill="#173844" font-weight="900">23.4</text>
+<rect x="1172" y="336" width="196" height="92" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="1196" y="370" font-size="14" fill="#61727B" font-weight="700">当前目标</text>
+<text x="1196" y="402" font-size="26" fill="#087B83" font-weight="900">减脂</text>
+<rect x="1172" y="452" width="196" height="120" rx="18" fill="#FFF9F4" stroke="#F2D9C8"/>
+<text x="1196" y="486" font-size="14" fill="#B36D3A" font-weight="800">缓存影响</text>
+<text x="1196" y="516" font-size="13" fill="#61727B" font-weight="600">保存后失效：</text>
+<text x="1196" y="542" font-size="13" fill="#61727B" font-weight="600">profile-center</text>
+<text x="1196" y="564" font-size="13" fill="#61727B" font-weight="600">dashboard / trends</text>
+<rect x="1172" y="604" width="196" height="132" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="1196" y="638" font-size="14" fill="#61727B" font-weight="800">最近更新</text>
+<text x="1196" y="668" font-size="16" fill="#173844" font-weight="900">2026-05-19</text>
+<text x="1196" y="696" font-size="13" fill="#61727B" font-weight="600">由本人在 App 修改</text>
+</svg>

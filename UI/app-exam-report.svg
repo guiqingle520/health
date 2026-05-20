@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="872" viewBox="0 0 430 872" role="img" aria-labelledby="title desc">
+<title id="title">App 体检报告页</title>
+<desc id="desc">HealthGuard App examination report prototype.</desc>
+<style>text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;letter-spacing:0}</style>
+<defs>
+  <filter id="softShadow" x="-18%" y="-18%" width="136%" height="145%"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#173026" flood-opacity="0.08"/></filter>
+  <linearGradient id="screenBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7FAF6"/><stop offset="1" stop-color="#EFF4EF"/></linearGradient>
+</defs>
+<rect x="0" y="0" width="430" height="872" fill="#E8EEE8"/>
+<rect x="14" y="14" width="402" height="844" rx="40" fill="url(#screenBg)" stroke="#1F352B" stroke-width="5"/>
+<text x="42" y="52" font-size="15" fill="#0B1D17" font-weight="800">9:41</text>
+<circle cx="322" cy="39" r="7" fill="#4B5750"/><circle cx="344" cy="39" r="7" fill="#4B5750"/><rect x="356" y="33" width="20" height="11" rx="6" fill="#4B5750"/>
+<circle cx="54" cy="96" r="18" fill="#FFFFFF" filter="url(#softShadow)"/><text x="54" y="103" font-size="24" fill="#173844" font-weight="700" text-anchor="middle">‹</text>
+<text x="84" y="92" font-size="13" fill="#60708F" font-weight="600">健康档案</text>
+<text x="84" y="122" font-size="24" fill="#0B1D17" font-weight="900">体检报告</text>
+<rect x="312" y="86" width="70" height="34" rx="17" fill="#15A3A3"/><text x="347" y="108" font-size="13" fill="#FFFFFF" font-weight="900" text-anchor="middle">上传</text>
+
+<rect x="36" y="148" width="348" height="138" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="60" y="184" font-size="17" fill="#0B1D17" font-weight="900">年度体检报告</text>
+<text x="60" y="210" font-size="13" fill="#60708F" font-weight="600">2026-05-10 · 市中心体检中心</text>
+<text x="60" y="246" font-size="30" fill="#B36D3A" font-weight="900">2</text><text x="92" y="246" font-size="13" fill="#60708F" font-weight="700">项需关注</text>
+<rect x="250" y="218" width="96" height="34" rx="17" fill="#FFF5EA"/><text x="298" y="240" font-size="13" fill="#B36D3A" font-weight="800" text-anchor="middle">查看详情</text>
+
+<rect x="36" y="306" width="348" height="236" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="60" y="340" font-size="17" fill="#0B1D17" font-weight="900">关键指标</text>
+<rect x="58" y="362" width="300" height="54" rx="16" fill="#FFF9F4" stroke="#F2D9C8"/>
+<text x="76" y="386" font-size="14" fill="#0B1D17" font-weight="900">空腹血糖</text><text x="76" y="406" font-size="12" fill="#60708F" font-weight="600">6.1 mmol/L · 参考 3.9-6.1</text><rect x="292" y="374" width="48" height="26" rx="13" fill="#FFF0E2"/><text x="316" y="392" font-size="11" fill="#B36D3A" font-weight="800" text-anchor="middle">临界</text>
+<rect x="58" y="428" width="300" height="54" rx="16" fill="#FFF9F4" stroke="#F2D9C8"/>
+<text x="76" y="452" font-size="14" fill="#0B1D17" font-weight="900">低密度胆固醇</text><text x="76" y="472" font-size="12" fill="#60708F" font-weight="600">3.5 mmol/L · 参考 &lt; 3.4</text><rect x="292" y="440" width="48" height="26" rx="13" fill="#FFF0E2"/><text x="316" y="458" font-size="11" fill="#B36D3A" font-weight="800" text-anchor="middle">偏高</text>
+<rect x="58" y="494" width="300" height="28" rx="14" fill="#EEFBF8"/>
+<text x="208" y="513" font-size="12" fill="#087B83" font-weight="800" text-anchor="middle">异常只按报告参考范围展示，不做诊断</text>
+
+<rect x="36" y="562" width="348" height="176" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="60" y="596" font-size="17" fill="#0B1D17" font-weight="900">历史报告</text>
+<rect x="58" y="618" width="300" height="48" rx="15" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="76" y="640" font-size="14" fill="#0B1D17" font-weight="900">季度复查</text><text x="76" y="658" font-size="12" fill="#60708F" font-weight="600">2026-02-18 · 1 项关注</text><text x="338" y="650" font-size="20" fill="#60708F" text-anchor="middle">›</text>
+<rect x="58" y="678" width="300" height="48" rx="15" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="76" y="700" font-size="14" fill="#0B1D17" font-weight="900">入职体检</text><text x="76" y="718" font-size="12" fill="#60708F" font-weight="600">2025-12-08 · 无关注项</text><text x="338" y="710" font-size="20" fill="#60708F" text-anchor="middle">›</text>
+
+<rect x="36" y="756" width="348" height="42" rx="18" fill="#EEFBF8"/>
+<text x="60" y="782" font-size="13" fill="#087B83" font-weight="800">支持手动录入，OCR 识别为后续能力</text>
+<rect x="32" y="816" width="366" height="30" rx="15" fill="#15A3A3"/>
+<text x="215" y="836" font-size="13" fill="#FFFFFF" font-weight="900" text-anchor="middle">新增体检报告</text>
+</svg>

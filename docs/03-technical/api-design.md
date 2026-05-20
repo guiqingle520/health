@@ -6,6 +6,7 @@
 - 数据格式：REST JSON API
 - 鉴权：Bearer Token
 - 状态标签：`Current` 已实现，`Next` 近期建议，`Future` 远期方向
+- 国际化：后续新增接口如涉及用户可见文案、错误提示、通知、报告或 AI 建议，必须支持 locale；错误响应优先返回稳定错误码，由客户端本地化展示。
 
 ## 2. Redis 缓存约定
 
@@ -94,6 +95,7 @@ Redis 作为服务端缓存中间件和短期协调层，不改变现有 API 路
 - 收敛公开查询：`GET /health/profiles/:userId` 应增加权限控制或仅内部使用。
 - 扩展档案详情：慢性病史、过敏史、用药情况、运动习惯。
 - 档案 upsert 后失效：`health:profile:{userId}`、`health:dashboard:{userId}:*`、`health:profile-center:{userId}`。
+- 基本信息编辑的字段、校验和 UI 方案见 [基本信息开发设计方案](./basic-profile-development.md)。
 
 ## 5. 饮食记录接口
 
@@ -134,6 +136,32 @@ Redis 作为服务端缓存中间件和短期协调层，不改变现有 API 路
 - `PATCH /health/diet-records/:id`、`DELETE /health/diet-records/:id`。
 - `POST /health/diet-records/photo-estimation`：拍照识别入口，返回待确认营养估算。
 - 写入、编辑、删除后失效对应日期的日汇总、首页、饮食历史、趋势和报告缓存。
+
+## 5.1 记录中心接口
+
+### Next
+
+| 方法 | 路径 | 说明 |
+|---|---|---|
+| `GET` | `/health/records/center` | 记录中心聚合入口，返回饮食、运动、饮水、睡眠最近记录和快捷入口 |
+| `GET` | `/health/records/center?date=YYYY-MM-DD` | 查看指定日期的四类记录 |
+
+### 返回方向
+
+```json
+{
+  "date": "2026-05-20",
+  "sections": [
+    { "type": "diet", "title": "饮食", "count": 3 },
+    { "type": "exercise", "title": "运动", "count": 1 },
+    { "type": "water", "title": "饮水", "count": 5 },
+    { "type": "sleep", "title": "睡眠", "count": 1 }
+  ],
+  "quickActions": ["diet", "exercise", "water", "sleep"]
+}
+```
+
+记录中心只做聚合，不做重计算。写入成功后需刷新对应日期的记录中心、日汇总、趋势和报告缓存。
 
 ## 6. 运动记录接口
 
@@ -213,6 +241,12 @@ Redis 作为服务端缓存中间件和短期协调层，不改变现有 API 路
 
 趋势接口是 Redis 缓存优先级较高的读接口。按 `metric + period + from + to` 维度缓存聚合结果，Garmin backfill 或手动指标写入后必须失效受影响周期缓存。
 
+### Next 设计要点
+
+- 趋势指标至少覆盖体重、健康分、静息心率、热量、运动消耗、饮水、睡眠和目标达成率。
+- 趋势点需要支持空数组返回，避免前端强依赖 mock。
+- 目标变化时，趋势接口需要同步更新目标线或达成率。
+
 ## 9. AI 建议
 
 ### Next
@@ -238,6 +272,12 @@ Redis 作为服务端缓存中间件和短期协调层，不改变现有 API 路
 
 建议列表可短 TTL 缓存，但建议动作必须落库。`POST /health/ai/recommendations/:id/actions` 成功后，应删除 `health:ai:recommendations:{userId}:{date}`，避免用户看到已处理建议再次处于待处理状态。
 
+### Next 设计要点
+
+- AI 建议优先来源于记录、趋势、目标和最近异常。
+- 建议类型需覆盖饮水、睡眠、运动、饮食、目标偏离、趋势异常和用药提醒。
+- 建议卡必须能回溯触发原因，避免只给结果不给解释。
+
 ## 10. 我的页、报告、家庭、设备
 
 ### Next
@@ -245,7 +285,11 @@ Redis 作为服务端缓存中间件和短期协调层，不改变现有 API 路
 - `GET /health/profile-center/me`：个人中心聚合信息。
 - `GET /health/reports?period=week|month`：报告列表。
 - `POST /health/reports/:id/export`：报告导出。
+- `POST /health/reports/:id/share`：创建分享链接或分享对象。
+- `DELETE /health/reports/:id/share/:shareId`：撤销分享。
 - `GET /health/notifications/settings` / `PUT /health/notifications/settings`：通知提醒设置。
+- `GET /health/goals/me` / `PUT /health/goals/me`：目标设定和提醒。
+- `GET /health/preferences/me` / `PUT /health/preferences/me`：语言、单位和显示偏好。国际化详细方案见 [国际化开发设计方案](./i18n-development.md)。
 - Garmin 设备接入接口方向：
   - `GET /health/devices/connections`：当前用户已连接设备与同步状态。
   - `POST /health/devices/garmin/connect`：创建 Garmin OAuth 授权链接。
@@ -265,7 +309,57 @@ Redis 作为服务端缓存中间件和短期协调层，不改变现有 API 路
 - 设备接入：更多厂商绑定、同步记录、设备指标查询。
 - Pro 会员：权益、订阅、报告权限。
 
-## 11. 错误与权限演进
+## 10.1 通知与目标
+
+### Next
+
+- `GET /health/notifications/settings`：读取通知设置。
+- `PUT /health/notifications/settings`：保存通知设置。
+- `GET /health/goals/me`：读取当前用户目标列表。
+- `PUT /health/goals/me`：批量保存当前用户目标。
+
+### 约束
+
+- 通知设置与目标保存后需同时刷新首页、记录中心、趋势、AI 建议和报告缓存。
+- 目标接口必须校验周期、单位和数值范围。
+- 通知提醒与目标设定都属于当前用户私有配置，只能读写本人数据。
+
+## 11. 健康档案扩展接口
+
+详细设计见 [健康档案 / 用药管理 / 体检报告开发方案](./health-profile-subfeatures-development.md)。
+
+### Next
+
+- `GET /health/profile-detail/me`：健康背景、完整度、数据来源和基础信息摘要。
+- `PATCH /health/profile-detail/me`：更新慢病史、过敏史、家族史、运动习惯。
+- `GET /health/medications`：获取用药列表和今日提醒状态。
+- `POST /health/medications`：新增药品计划。
+- `PATCH /health/medications/:id`：编辑药品计划。
+- `POST /health/medications/:id/actions`：记录已服用、稍后、跳过。
+- `GET /health/exam-reports`：体检报告列表。
+- `GET /health/exam-reports/:id`：体检报告详情。
+- `POST /health/exam-reports`：新增手动体检报告。
+- `PATCH /health/exam-reports/:id`：更新体检报告摘要。
+- `DELETE /health/exam-reports/:id`：删除未锁定报告。
+
+### 约束
+
+- 用药接口只做记录和提醒，不提供剂量建议。
+- 体检报告接口只保留原始结果和参考范围，不输出诊断结论。
+- 所有扩展接口在写入后需要失效 `profile-center`、相关列表缓存和首页摘要缓存。
+
+## 12. 国际化接口约定
+
+### Next
+
+- 客户端请求头带 `Accept-Language` 和 `X-Locale`，例如 `zh-Hans`、`zh-Hant`、`en`、`ja`、`ko`。
+- `X-Locale` 优先于 `Accept-Language`，服务端统一 normalize。
+- `GET /health/preferences/me` 返回 `localeMode` 和 `locale`。
+- `PUT /health/preferences/me` 保存 canonical locale。
+- 后端错误响应返回稳定 `errorCode`，客户端本地化展示。
+- AI 建议、健康报告、通知模板等生成类内容需要按 locale 生成，并在缓存 key 中包含 locale。
+
+## 13. 错误与权限演进
 
 ### Current
 

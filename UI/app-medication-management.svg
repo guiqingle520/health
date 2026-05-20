@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="872" viewBox="0 0 430 872" role="img" aria-labelledby="title desc">
+<title id="title">App 用药管理页</title>
+<desc id="desc">HealthGuard App medication management prototype.</desc>
+<style>text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;letter-spacing:0}</style>
+<defs>
+  <filter id="softShadow" x="-18%" y="-18%" width="136%" height="145%"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#173026" flood-opacity="0.08"/></filter>
+  <linearGradient id="screenBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7FAF6"/><stop offset="1" stop-color="#EFF4EF"/></linearGradient>
+</defs>
+<rect x="0" y="0" width="430" height="872" fill="#E8EEE8"/>
+<rect x="14" y="14" width="402" height="844" rx="40" fill="url(#screenBg)" stroke="#1F352B" stroke-width="5"/>
+<text x="42" y="52" font-size="15" fill="#0B1D17" font-weight="800">9:41</text>
+<circle cx="322" cy="39" r="7" fill="#4B5750"/><circle cx="344" cy="39" r="7" fill="#4B5750"/><rect x="356" y="33" width="20" height="11" rx="6" fill="#4B5750"/>
+<circle cx="54" cy="96" r="18" fill="#FFFFFF" filter="url(#softShadow)"/><text x="54" y="103" font-size="24" fill="#173844" font-weight="700" text-anchor="middle">‹</text>
+<text x="84" y="92" font-size="13" fill="#60708F" font-weight="600">健康档案</text>
+<text x="84" y="122" font-size="24" fill="#0B1D17" font-weight="900">用药管理</text>
+<rect x="322" y="86" width="60" height="34" rx="17" fill="#15A3A3"/><text x="352" y="108" font-size="13" fill="#FFFFFF" font-weight="900" text-anchor="middle">新增</text>
+
+<rect x="36" y="148" width="348" height="120" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="60" y="184" font-size="16" fill="#0B1D17" font-weight="900">今日用药</text>
+<text x="60" y="214" font-size="30" fill="#087B83" font-weight="900">1</text><text x="90" y="214" font-size="13" fill="#60708F" font-weight="700">待服</text>
+<text x="158" y="214" font-size="30" fill="#173844" font-weight="900">2</text><text x="190" y="214" font-size="13" fill="#60708F" font-weight="700">已服</text>
+<text x="258" y="214" font-size="30" fill="#B36D3A" font-weight="900">0</text><text x="288" y="214" font-size="13" fill="#60708F" font-weight="700">漏服</text>
+<rect x="60" y="232" width="284" height="8" rx="4" fill="#ECF1EE"/><rect x="60" y="232" width="190" height="8" rx="4" fill="#15A3A3"/>
+
+<rect x="36" y="290" width="348" height="168" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="60" y="324" font-size="17" fill="#0B1D17" font-weight="900">二甲双胍</text>
+<text x="60" y="350" font-size="13" fill="#60708F" font-weight="600">0.5g · 每日 2 次 · 08:00 / 20:00</text>
+<rect x="284" y="310" width="72" height="30" rx="15" fill="#FFF5EA"/><text x="320" y="330" font-size="12" fill="#B36D3A" font-weight="800" text-anchor="middle">待服</text>
+<rect x="60" y="374" width="86" height="36" rx="18" fill="#15A3A3"/><text x="103" y="397" font-size="13" fill="#FFFFFF" font-weight="900" text-anchor="middle">已服用</text>
+<rect x="156" y="374" width="86" height="36" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/><text x="199" y="397" font-size="13" fill="#61727B" font-weight="800" text-anchor="middle">稍后</text>
+<rect x="252" y="374" width="86" height="36" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/><text x="295" y="397" font-size="13" fill="#61727B" font-weight="800" text-anchor="middle">跳过</text>
+<text x="60" y="436" font-size="12" fill="#60708F" font-weight="600">提示：系统仅做记录和提醒，不提供用药剂量建议</text>
+
+<rect x="36" y="478" width="348" height="218" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="60" y="512" font-size="17" fill="#0B1D17" font-weight="900">用药计划</text>
+<rect x="58" y="532" width="300" height="54" rx="16" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="76" y="556" font-size="14" fill="#0B1D17" font-weight="900">阿托伐他汀</text><text x="76" y="576" font-size="12" fill="#60708F" font-weight="600">20mg · 睡前 · 已服用</text><text x="338" y="566" font-size="20" fill="#60708F" text-anchor="middle">›</text>
+<rect x="58" y="598" width="300" height="54" rx="16" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="76" y="622" font-size="14" fill="#0B1D17" font-weight="900">维生素 D</text><text x="76" y="642" font-size="12" fill="#60708F" font-weight="600">800 IU · 早餐后 · 已服用</text><text x="338" y="632" font-size="20" fill="#60708F" text-anchor="middle">›</text>
+<rect x="58" y="664" width="300" height="18" rx="9" fill="#EEFBF8"/><text x="208" y="677" font-size="11" fill="#087B83" font-weight="800" text-anchor="middle">停用药品可在归档中查看</text>
+
+<rect x="36" y="716" width="348" height="66" rx="20" fill="#EEFBF8" filter="url(#softShadow)"/>
+<text x="60" y="746" font-size="14" fill="#0B1D17" font-weight="900">提醒设置</text>
+<text x="60" y="768" font-size="12" fill="#60708F" font-weight="600">静默时间 22:30 - 08:00，服药提醒仍会记录</text>
+
+<rect x="32" y="806" width="366" height="40" rx="20" fill="#15A3A3"/>
+<text x="215" y="831" font-size="15" fill="#FFFFFF" font-weight="900" text-anchor="middle">新增用药计划</text>
+</svg>

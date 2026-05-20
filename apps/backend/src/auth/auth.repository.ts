@@ -39,7 +39,7 @@ export class AuthRepository {
       `INSERT INTO auth_refresh_tokens (user_id, refresh_token)
        VALUES ($1, $2)
        ON CONFLICT (user_id)
-       DO UPDATE SET refresh_token = EXCLUDED.refresh_token, issued_at = NOW()`,
+       DO UPDATE SET refresh_token = EXCLUDED.refresh_token`,
       [userId, refreshToken],
     );
   }

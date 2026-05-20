@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="872" viewBox="0 0 430 872" role="img" aria-labelledby="title desc">
+<title id="title">App 健康档案页</title>
+<desc id="desc">HealthGuard App health profile prototype.</desc>
+<style>text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;letter-spacing:0}</style>
+<defs>
+  <filter id="softShadow" x="-18%" y="-18%" width="136%" height="145%"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#173026" flood-opacity="0.08"/></filter>
+  <linearGradient id="screenBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7FAF6"/><stop offset="1" stop-color="#EFF4EF"/></linearGradient>
+</defs>
+<rect x="0" y="0" width="430" height="872" fill="#E8EEE8"/>
+<rect x="14" y="14" width="402" height="844" rx="40" fill="url(#screenBg)" stroke="#1F352B" stroke-width="5"/>
+<text x="42" y="52" font-size="15" fill="#0B1D17" font-weight="800">9:41</text>
+<circle cx="322" cy="39" r="7" fill="#4B5750"/><circle cx="344" cy="39" r="7" fill="#4B5750"/><rect x="356" y="33" width="20" height="11" rx="6" fill="#4B5750"/>
+
+<circle cx="54" cy="96" r="18" fill="#FFFFFF" filter="url(#softShadow)"/><text x="54" y="103" font-size="24" fill="#173844" font-weight="700" text-anchor="middle">‹</text>
+<text x="84" y="92" font-size="13" fill="#60708F" font-weight="600">健康档案</text>
+<text x="84" y="122" font-size="24" fill="#0B1D17" font-weight="900">健康档案</text>
+
+<rect x="36" y="148" width="348" height="98" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="60" y="184" font-size="16" fill="#0B1D17" font-weight="900">档案完整度 85%</text>
+<text x="60" y="210" font-size="12" fill="#60708F" font-weight="600">补充慢病史和过敏史可提升建议准确度</text>
+<rect x="244" y="184" width="104" height="8" rx="4" fill="#ECF1EE"/><rect x="244" y="184" width="88" height="8" rx="4" fill="#15A3A3"/>
+
+<rect x="36" y="266" width="348" height="148" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="58" y="298" font-size="18" fill="#0B1D17" font-weight="900">基础信息</text>
+<text x="58" y="328" font-size="13" fill="#60708F" font-weight="600">昵称、年龄、性别、身高、体重、目标</text>
+<text x="58" y="360" font-size="14" fill="#0B1D17" font-weight="700">张先生 · 31 岁 · 男</text>
+<text x="58" y="386" font-size="14" fill="#0B1D17" font-weight="700">175 cm · 71.6 kg · 减脂</text>
+<rect x="270" y="302" width="90" height="34" rx="17" fill="#EEFBF8"/><text x="315" y="324" font-size="13" fill="#087B83" font-weight="800" text-anchor="middle">编辑</text>
+
+<rect x="36" y="432" width="348" height="160" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="58" y="464" font-size="18" fill="#0B1D17" font-weight="900">健康背景</text>
+<text x="58" y="494" font-size="13" fill="#60708F" font-weight="600">慢病史 / 过敏史 / 家族史 / 运动习惯</text>
+<rect x="58" y="512" width="96" height="34" rx="17" fill="#FFF9F4"/><text x="106" y="534" font-size="13" fill="#B36D3A" font-weight="800" text-anchor="middle">高血压</text>
+<rect x="164" y="512" width="96" height="34" rx="17" fill="#F8FCFB" stroke="#DCE9E6"/><text x="212" y="534" font-size="13" fill="#60708F" font-weight="700" text-anchor="middle">青霉素过敏</text>
+<rect x="270" y="512" width="90" height="34" rx="17" fill="#F8FCFB" stroke="#DCE9E6"/><text x="315" y="534" font-size="13" fill="#60708F" font-weight="700" text-anchor="middle">每周快走</text>
+
+<rect x="36" y="610" width="348" height="126" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="58" y="642" font-size="18" fill="#0B1D17" font-weight="900">数据来源</text>
+<text x="58" y="670" font-size="13" fill="#60708F" font-weight="600">手动记录、Garmin、体检报告</text>
+<rect x="58" y="688" width="82" height="30" rx="15" fill="#DDF5EF"/><text x="99" y="708" font-size="12" fill="#087B83" font-weight="800" text-anchor="middle">手动</text>
+<rect x="148" y="688" width="82" height="30" rx="15" fill="#DDF5EF"/><text x="189" y="708" font-size="12" fill="#087B83" font-weight="800" text-anchor="middle">Garmin</text>
+<rect x="238" y="688" width="118" height="30" rx="15" fill="#DDF5EF"/><text x="297" y="708" font-size="12" fill="#087B83" font-weight="800" text-anchor="middle">体检报告</text>
+
+<rect x="32" y="806" width="366" height="40" rx="20" fill="#15A3A3"/>
+<text x="215" y="831" font-size="15" fill="#FFFFFF" font-weight="900" text-anchor="middle">编辑健康档案</text>
+</svg>
