@@ -13,6 +13,7 @@ export interface NutritionMetrics {
 }
 
 export interface DietRecordHistoryItem {
+  id: string;
   mealType: 'breakfast' | 'lunch' | 'dinner' | 'snack';
   foodName: string;
   nutrition: NutritionMetrics;
@@ -20,6 +21,7 @@ export interface DietRecordHistoryItem {
 }
 
 export interface ExerciseRecordHistoryItem {
+  id: string;
   exerciseType: 'aerobic' | 'strength' | 'flexibility';
   durationMinutes: number;
   caloriesBurned: number;
@@ -54,4 +56,72 @@ export interface DashboardView {
   cards: DashboardCardMetrics;
   aiInsights: string[];
   summary: DailySummary;
+}
+
+export type HealthTrendMetric =
+  | 'weight'
+  | 'score'
+  | 'heartRate'
+  | 'calories'
+  | 'water'
+  | 'sleep';
+
+export type HealthTrendPeriod = 'week' | 'month' | 'year';
+
+export interface HealthTrendPoint {
+  date: string;
+  value: number;
+}
+
+export interface HealthTrendSignal {
+  level: 'info' | 'warning';
+  message: string;
+}
+
+export interface HealthTrendView {
+  metric: HealthTrendMetric;
+  period: HealthTrendPeriod;
+  currentValue: number;
+  delta: number;
+  unit: string;
+  points: HealthTrendPoint[];
+  signals: HealthTrendSignal[];
+}
+
+export interface AiRecommendationItem {
+  id: string;
+  type: 'diet' | 'exercise' | 'water' | 'sleep';
+  title: string;
+  reason: string;
+  actionText: string;
+  status: 'pending';
+}
+
+export interface AiRecommendationTodayView {
+  date: string;
+  items: AiRecommendationItem[];
+}
+
+export interface ProfileCenterView {
+  profile: {
+    nickname: string;
+    goal: 'lose_fat' | 'gain_muscle' | 'maintain';
+    goalLabel: string;
+  };
+  stats: {
+    healthScore: number;
+    streakDays: number;
+    reportCount: number;
+    connectedDevices: number;
+  };
+  pro: {
+    enabled: boolean;
+    title: string;
+    subtitle: string;
+  };
+  sections: Array<{
+    id: string;
+    title: string;
+    subtitle: string;
+  }>;
 }

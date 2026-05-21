@@ -33,6 +33,7 @@ type DietAggregateRow = {
 };
 
 type DietHistoryRow = {
+  id: string;
   meal_type: 'breakfast' | 'lunch' | 'dinner' | 'snack';
   food_name: string;
   recorded_on: string;
@@ -43,6 +44,7 @@ type ExerciseAggregateRow = {
 };
 
 type ExerciseHistoryRow = {
+  id: string;
   exercise_type: 'aerobic' | 'strength' | 'flexibility';
   duration_minutes: number;
   calories_burned: number | string;
@@ -106,7 +108,8 @@ export class HealthRepository {
   async insertDietRecord(
     payload: CreateDietRecordDto,
     date: string,
-  ): Promise<CreateDietRecordDto & { date: string }> {
+  ): Promise<CreateDietRecordDto & { id: string; date: string }> {
+    const id = randomUUID();
     await this.pool.query(
       `INSERT INTO diet_records (
          id,
@@ -131,7 +134,7 @@ export class HealthRepository {
          $11, $12, $13, $14, $15, $16
        )`,
       [
-        randomUUID(),
+        id,
         payload.userId,
         payload.mealType,
         payload.foodName,
@@ -151,6 +154,7 @@ export class HealthRepository {
     );
 
     return {
+      id,
       ...payload,
       date,
     };
@@ -159,7 +163,8 @@ export class HealthRepository {
   async insertExerciseRecord(
     payload: CreateExerciseRecordDto,
     date: string,
-  ): Promise<CreateExerciseRecordDto & { date: string }> {
+  ): Promise<CreateExerciseRecordDto & { id: string; date: string }> {
+    const id = randomUUID();
     await this.pool.query(
       `INSERT INTO exercise_records (
          id,
@@ -170,7 +175,7 @@ export class HealthRepository {
          recorded_on
        ) VALUES ($1, $2, $3, $4, $5, $6)`,
       [
-        randomUUID(),
+        id,
         payload.userId,
         payload.exerciseType,
         payload.durationMinutes,
@@ -180,6 +185,7 @@ export class HealthRepository {
     );
 
     return {
+      id,
       ...payload,
       date,
     };
@@ -239,9 +245,21 @@ export class HealthRepository {
     from: string,
     to: string,
     limit: number,
+    mealType?: 'breakfast' | 'lunch' | 'dinner' | 'snack',
   ): Promise<DietRecordHistoryItem[]> {
+    const params: Array<string | number> = [userId, from, to];
+    const filters = ['user_id = $1', 'recorded_on BETWEEN $2 AND $3'];
+
+    if (mealType) {
+      params.push(mealType);
+      filters.push(`meal_type = $${params.length}`);
+    }
+
+    params.push(limit);
+
     const result = await this.pool.query<DietHistoryRow>(
       `SELECT
+         id,
          meal_type,
          food_name,
          recorded_on,
@@ -257,13 +275,14 @@ export class HealthRepository {
          vitamin_c_mg,
          vitamin_d_iu
        FROM diet_records
-       WHERE user_id = $1 AND recorded_on BETWEEN $2 AND $3
+       WHERE ${filters.join(' AND ')}
        ORDER BY recorded_on DESC, id DESC
-       LIMIT $4`,
-      [userId, from, to, limit],
+       LIMIT $${params.length}`,
+      params,
     );
 
     return result.rows.map((row) => ({
+      id: row.id,
       mealType: row.meal_type,
       foodName: row.food_name,
       nutrition: this.mapNutrition(row),
@@ -276,26 +295,123 @@ export class HealthRepository {
     from: string,
     to: string,
     limit: number,
+    exerciseType?: 'aerobic' | 'strength' | 'flexibility',
   ): Promise<ExerciseRecordHistoryItem[]> {
+    const params: Array<string | number> = [userId, from, to];
+    const filters = ['user_id = $1', 'recorded_on BETWEEN $2 AND $3'];
+
+    if (exerciseType) {
+      params.push(exerciseType);
+      filters.push(`exercise_type = $${params.length}`);
+    }
+
+    params.push(limit);
+
     const result = await this.pool.query<ExerciseHistoryRow>(
       `SELECT
+         id,
          exercise_type,
          duration_minutes,
          calories_burned,
          recorded_on
        FROM exercise_records
-       WHERE user_id = $1 AND recorded_on BETWEEN $2 AND $3
+       WHERE ${filters.join(' AND ')}
        ORDER BY recorded_on DESC, id DESC
-       LIMIT $4`,
-      [userId, from, to, limit],
+       LIMIT $${params.length}`,
+      params,
     );
 
     return result.rows.map((row) => ({
+      id: row.id,
       exerciseType: row.exercise_type,
       durationMinutes: row.duration_minutes,
       caloriesBurned: this.toNumber(row.calories_burned),
       recordedOn: row.recorded_on,
     }));
+  }
+
+  async findDietRecordById(
+    userId: string,
+    id: string,
+  ): Promise<DietRecordHistoryItem | undefined> {
+    const result = await this.pool.query<DietHistoryRow>(
+      `SELECT
+         id,
+         meal_type,
+         food_name,
+         recorded_on,
+         calories,
+         carbs,
+         protein,
+         fat,
+         fiber,
+         sodium_mg,
+         calcium_mg,
+         iron_mg,
+         vitamin_a_mcg,
+         vitamin_c_mg,
+         vitamin_d_iu
+       FROM diet_records
+       WHERE id = $1 AND user_id = $2`,
+      [id, userId],
+    );
+
+    const row = result.rows[0];
+    return row
+      ? {
+          id: row.id,
+          mealType: row.meal_type,
+          foodName: row.food_name,
+          nutrition: this.mapNutrition(row),
+          recordedOn: row.recorded_on,
+        }
+      : undefined;
+  }
+
+  async findExerciseRecordById(
+    userId: string,
+    id: string,
+  ): Promise<ExerciseRecordHistoryItem | undefined> {
+    const result = await this.pool.query<ExerciseHistoryRow>(
+      `SELECT
+         id,
+         exercise_type,
+         duration_minutes,
+         calories_burned,
+         recorded_on
+       FROM exercise_records
+       WHERE id = $1 AND user_id = $2`,
+      [id, userId],
+    );
+
+    const row = result.rows[0];
+    return row
+      ? {
+          id: row.id,
+          exerciseType: row.exercise_type,
+          durationMinutes: row.duration_minutes,
+          caloriesBurned: this.toNumber(row.calories_burned),
+          recordedOn: row.recorded_on,
+        }
+      : undefined;
+  }
+
+  async deleteDietRecordById(userId: string, id: string): Promise<boolean> {
+    const result = await this.pool.query(
+      'DELETE FROM diet_records WHERE id = $1 AND user_id = $2',
+      [id, userId],
+    );
+
+    return (result.rowCount ?? 0) > 0;
+  }
+
+  async deleteExerciseRecordById(userId: string, id: string): Promise<boolean> {
+    const result = await this.pool.query(
+      'DELETE FROM exercise_records WHERE id = $1 AND user_id = $2',
+      [id, userId],
+    );
+
+    return (result.rowCount ?? 0) > 0;
   }
 
   private mapProfile(row: ProfileRow): CreateProfileDto {
