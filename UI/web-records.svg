@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024" role="img" aria-labelledby="title desc">
+<title id="title">Web 记录中心页</title><desc id="desc">HealthGuard Web record center prototype.</desc>
+<style>
+text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;letter-spacing:0}.muted{fill:#61727B}.ink{fill:#173844}.teal{fill:#087B83}.small{font-size:13px}.label{font-size:14px;font-weight:700}.h1{font-size:30px;font-weight:900}.h2{font-size:18px;font-weight:900}.num{font-size:28px;font-weight:900}.cell{font-size:15px;fill:#173844}.soft{fill:#F4FAF8}.line{stroke:#DCE9E6;stroke-width:1}
+</style>
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#12343C" flood-opacity="0.10"/></filter></defs>
+<rect width="1440" height="1024" fill="#F4FAF8"/>
+<rect x="40" y="36" width="222" height="952" rx="24" fill="#FFFFFF" filter="url(#shadow)"/>
+<circle cx="82" cy="88" r="22" fill="#DDF5EF"/><path d="M72 88h20M82 78v20" stroke="#15A3A3" stroke-width="3" stroke-linecap="round"/><text x="116" y="84" class="ink" font-size="22" font-weight="900">HealthGuard</text><text x="116" y="108" class="muted small">Web 工作台</text>
+<rect x="62" y="140" width="156" height="42" rx="12" fill="#F3FBF9"/><circle cx="84" cy="161" r="6" fill="#15A3A3"/><text x="104" y="166" class="teal label">记录中心</text>
+<text x="104" y="224" class="muted label">数据趋势</text><circle cx="84" cy="219" r="6" fill="#DCE9E6"/>
+<text x="104" y="282" class="muted label">AI 建议</text><circle cx="84" cy="277" r="6" fill="#DCE9E6"/>
+<text x="104" y="340" class="muted label">报告分享</text><circle cx="84" cy="335" r="6" fill="#DCE9E6"/>
+<text x="104" y="398" class="muted label">家庭共享</text><circle cx="84" cy="393" r="6" fill="#DCE9E6"/>
+<text x="104" y="456" class="muted label">隐私安全</text><circle cx="84" cy="451" r="6" fill="#DCE9E6"/>
+<text x="300" y="88" class="muted small">记录中心 / 今日</text><text x="300" y="128" class="ink h1">四类健康记录</text>
+<rect x="1128" y="76" width="118" height="40" rx="14" fill="#FFFFFF" stroke="#DCE9E6"/><text x="1187" y="101" text-anchor="middle" class="teal label">导入</text>
+<rect x="1264" y="76" width="120" height="40" rx="14" fill="#15A3A3"/><text x="1324" y="101" text-anchor="middle" fill="#FFFFFF" class="label">新增记录</text>
+<rect x="300" y="164" width="250" height="126" rx="18" fill="#FFFFFF" filter="url(#shadow)"/><text x="326" y="198" class="muted label">饮食记录</text><text x="326" y="238" class="ink num">3 餐</text><text x="326" y="268" class="muted small">摄入 1680 kcal</text>
+<rect x="572" y="164" width="250" height="126" rx="18" fill="#FFFFFF" filter="url(#shadow)"/><text x="598" y="198" class="muted label">运动记录</text><text x="598" y="238" class="ink num">42 分钟</text><text x="598" y="268" class="muted small">消耗 360 kcal</text>
+<rect x="844" y="164" width="250" height="126" rx="18" fill="#FFFFFF" filter="url(#shadow)"/><text x="870" y="198" class="muted label">饮水记录</text><text x="870" y="238" class="ink num">1.6 L</text><text x="870" y="268" class="muted small">距离目标 400 ml</text>
+<rect x="1116" y="164" width="268" height="126" rx="18" fill="#FFFFFF" filter="url(#shadow)"/><text x="1142" y="198" class="muted label">睡眠记录</text><text x="1142" y="238" class="ink num">7.2 h</text><text x="1142" y="268" class="muted small">设备同步 06:42</text>
+<rect x="300" y="322" width="724" height="610" rx="22" fill="#FFFFFF" filter="url(#shadow)"/><text x="330" y="362" class="ink h2">今日记录明细</text><rect x="860" y="336" width="132" height="36" rx="12" fill="#F3FBF9"/><text x="926" y="359" text-anchor="middle" class="teal label">2026-05-20</text>
+<line x1="330" y1="392" x2="994" y2="392" class="line"/><text x="330" y="424" class="muted label">时间</text><text x="448" y="424" class="muted label">类型</text><text x="574" y="424" class="muted label">内容</text><text x="828" y="424" class="muted label">来源</text><text x="930" y="424" class="muted label">状态</text>
+<line x1="330" y1="444" x2="994" y2="444" class="line"/><text x="330" y="478" class="cell">08:10</text><text x="448" y="478" class="cell">饮食</text><text x="574" y="478" class="cell">燕麦牛奶、鸡蛋</text><text x="828" y="478" class="muted small">手动</text><text x="930" y="478" class="teal small">已汇总</text>
+<line x1="330" y1="500" x2="994" y2="500" class="line"/><text x="330" y="534" class="cell">12:36</text><text x="448" y="534" class="cell">饮水</text><text x="574" y="534" class="cell">500 ml</text><text x="828" y="534" class="muted small">快捷</text><text x="930" y="534" class="teal small">已汇总</text>
+<line x1="330" y1="556" x2="994" y2="556" class="line"/><text x="330" y="590" class="cell">18:20</text><text x="448" y="590" class="cell">运动</text><text x="574" y="590" class="cell">快走 42 分钟</text><text x="828" y="590" class="muted small">手动</text><text x="930" y="590" class="teal small">已汇总</text>
+<line x1="330" y1="612" x2="994" y2="612" class="line"/><text x="330" y="646" class="cell">23:10</text><text x="448" y="646" class="cell">睡眠</text><text x="574" y="646" class="cell">23:10 - 06:22</text><text x="828" y="646" class="muted small">Garmin</text><text x="930" y="646" fill="#D8792A" class="small">同步</text>
+<rect x="330" y="704" width="664" height="168" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/><text x="356" y="742" class="ink h2">历史补录</text><text x="356" y="776" class="muted small">支持选择日期补录，写入后同步日汇总、趋势、报告和 AI 建议缓存。</text><rect x="356" y="814" width="112" height="38" rx="12" fill="#15A3A3"/><text x="412" y="838" text-anchor="middle" fill="#FFFFFF" class="label">补录饮食</text><rect x="484" y="814" width="112" height="38" rx="12" fill="#FFFFFF" stroke="#DCE9E6"/><text x="540" y="838" text-anchor="middle" class="teal label">补录饮水</text>
+<rect x="1052" y="322" width="332" height="610" rx="22" fill="#FFFFFF" filter="url(#shadow)"/><text x="1082" y="362" class="ink h2">快捷模板</text>
+<rect x="1082" y="392" width="272" height="76" rx="16" fill="#F3FBF9"/><text x="1104" y="424" class="ink label">早餐常用</text><text x="1104" y="448" class="muted small">燕麦、鸡蛋、牛奶</text>
+<rect x="1082" y="488" width="272" height="76" rx="16" fill="#FFF7ED"/><text x="1104" y="520" class="ink label">晚间快走</text><text x="1104" y="544" class="muted small">40 分钟，低强度</text>
+<rect x="1082" y="584" width="272" height="76" rx="16" fill="#F3FBF9"/><text x="1104" y="616" class="ink label">饮水 300ml</text><text x="1104" y="640" class="muted small">一键记录到当前时间</text>
+<text x="1082" y="720" class="ink h2">联动结果</text><text x="1082" y="756" class="muted small">日汇总、数据趋势、报告、AI 建议</text><text x="1082" y="788" class="muted small">写入后主动失效相关缓存</text><rect x="1082" y="826" width="272" height="54" rx="16" fill="#173844"/><text x="1218" y="860" text-anchor="middle" fill="#FFFFFF" class="label">查看记录历史</text>
+</svg>

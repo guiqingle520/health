@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024" role="img" aria-labelledby="title desc">
+<title id="title">Web 健康档案页</title>
+<desc id="desc">HealthGuard Web health profile prototype.</desc>
+<style>text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;letter-spacing:0}</style>
+<defs>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#12343C" flood-opacity="0.10"/></filter>
+</defs>
+<rect x="0" y="0" width="1440" height="1024" fill="#F4FAF8"/>
+<rect x="40" y="36" width="222" height="952" rx="24" fill="#FFFFFF" filter="url(#softShadow)"/>
+<circle cx="82" cy="88" r="22" fill="#DDF5EF"/><path d="M72 88h20M82 78v20" stroke="#15A3A3" fill="none" stroke-width="3" stroke-linecap="round"/>
+<text x="116" y="82" font-size="22" fill="#173844" font-weight="800">HealthGuard</text><text x="116" y="108" font-size="13" fill="#61727B" font-weight="600">Web 工作台</text>
+<rect x="62" y="140" width="156" height="42" rx="12" fill="transparent"/><circle cx="84" cy="161" r="6" fill="#DCE9E6"/><text x="104" y="166" font-size="15" fill="#61727B" font-weight="600">总览</text>
+<rect x="62" y="198" width="156" height="42" rx="12" fill="#F3FBF9" stroke="#DCE9E6"/><circle cx="84" cy="219" r="6" fill="#15A3A3"/><text x="104" y="224" font-size="15" fill="#087B83" font-weight="800">健康档案</text>
+<rect x="62" y="256" width="156" height="42" rx="12" fill="transparent"/><circle cx="84" cy="277" r="6" fill="#DCE9E6"/><text x="104" y="282" font-size="15" fill="#61727B" font-weight="600">记录</text>
+<rect x="62" y="314" width="156" height="42" rx="12" fill="transparent"/><circle cx="84" cy="335" r="6" fill="#DCE9E6"/><text x="104" y="340" font-size="15" fill="#61727B" font-weight="600">AI 洞察</text>
+<rect x="62" y="372" width="156" height="42" rx="12" fill="transparent"/><circle cx="84" cy="393" r="6" fill="#DCE9E6"/><text x="104" y="398" font-size="15" fill="#61727B" font-weight="600">家人共享</text>
+<rect x="62" y="430" width="156" height="42" rx="12" fill="transparent"/><circle cx="84" cy="451" r="6" fill="#DCE9E6"/><text x="104" y="456" font-size="15" fill="#61727B" font-weight="600">设置</text>
+<rect x="62" y="902" width="156" height="52" rx="16" fill="#F8FCFB" stroke="#DCE9E6"/><text x="82" y="926" font-size="13" fill="#61727B" font-weight="500">账号</text><text x="82" y="948" font-size="16" fill="#173844" font-weight="800">张先生</text>
+
+<rect x="300" y="36" width="1100" height="72" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="332" y="82" font-size="26" fill="#173844" font-weight="800">健康档案</text>
+<rect x="1140" y="56" width="120" height="36" rx="18" fill="#F8FCFB" stroke="#DCE9E6"/><text x="1200" y="79" font-size="14" fill="#61727B" font-weight="700" text-anchor="middle">导出</text>
+<rect x="1276" y="56" width="90" height="36" rx="18" fill="#15A3A3"/><text x="1321" y="79" font-size="14" fill="#FFFFFF" font-weight="800" text-anchor="middle">编辑</text>
+
+<rect x="300" y="136" width="336" height="812" rx="24" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="330" y="182" font-size="22" fill="#173844" font-weight="800">档案完整度</text>
+<text x="330" y="220" font-size="44" fill="#087B83" font-weight="900">85%</text>
+<rect x="330" y="240" width="248" height="10" rx="5" fill="#DCE9E6"/><rect x="330" y="240" width="210" height="10" rx="5" fill="#15A3A3"/>
+<text x="330" y="286" font-size="16" fill="#173844" font-weight="800">基础信息</text>
+<text x="330" y="316" font-size="14" fill="#61727B" font-weight="600">张先生 · 31 岁 · 男</text>
+<text x="330" y="346" font-size="14" fill="#61727B" font-weight="600">175 cm · 71.6 kg · 减脂</text>
+<rect x="330" y="374" width="220" height="42" rx="21" fill="#EEFBF8"/><text x="440" y="401" font-size="14" fill="#087B83" font-weight="800" text-anchor="middle">查看基本信息</text>
+<text x="330" y="470" font-size="16" fill="#173844" font-weight="800">健康背景</text>
+<text x="330" y="500" font-size="14" fill="#61727B" font-weight="600">慢病史：高血压</text>
+<text x="330" y="530" font-size="14" fill="#61727B" font-weight="600">过敏史：青霉素</text>
+<text x="330" y="560" font-size="14" fill="#61727B" font-weight="600">家族史：糖尿病</text>
+<text x="330" y="590" font-size="14" fill="#61727B" font-weight="600">运动习惯：每周 3 次快走</text>
+<text x="330" y="660" font-size="16" fill="#173844" font-weight="800">数据来源</text>
+<rect x="330" y="686" width="84" height="32" rx="16" fill="#DDF5EF"/><text x="372" y="707" font-size="12" fill="#087B83" font-weight="800" text-anchor="middle">手动</text>
+<rect x="422" y="686" width="84" height="32" rx="16" fill="#DDF5EF"/><text x="464" y="707" font-size="12" fill="#087B83" font-weight="800" text-anchor="middle">Garmin</text>
+<rect x="514" y="686" width="84" height="32" rx="16" fill="#DDF5EF"/><text x="556" y="707" font-size="12" fill="#087B83" font-weight="800" text-anchor="middle">体检</text>
+
+<rect x="660" y="136" width="500" height="812" rx="24" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="700" y="184" font-size="24" fill="#173844" font-weight="900">档案详情</text>
+<text x="700" y="216" font-size="14" fill="#61727B" font-weight="600">用于首页、AI 建议和报告的上下文</text>
+<text x="700" y="278" font-size="15" fill="#61727B" font-weight="700">慢病史</text>
+<rect x="700" y="296" width="420" height="48" rx="14" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="724" y="326" font-size="16" fill="#173844" font-weight="800">高血压</text>
+<text x="700" y="388" font-size="15" fill="#61727B" font-weight="700">过敏史</text>
+<rect x="700" y="406" width="420" height="48" rx="14" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="724" y="436" font-size="16" fill="#173844" font-weight="800">青霉素</text>
+<text x="700" y="498" font-size="15" fill="#61727B" font-weight="700">家族史</text>
+<rect x="700" y="516" width="420" height="48" rx="14" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="724" y="546" font-size="16" fill="#173844" font-weight="800">糖尿病</text>
+<text x="700" y="608" font-size="15" fill="#61727B" font-weight="700">运动习惯</text>
+<rect x="700" y="626" width="420" height="48" rx="14" fill="#F8FCFB" stroke="#DCE9E6"/>
+<text x="724" y="656" font-size="16" fill="#173844" font-weight="800">每周 3 次快走，每次 40 分钟</text>
+<rect x="700" y="728" width="420" height="76" rx="18" fill="#FFF9F4" stroke="#F2D9C8"/>
+<text x="724" y="760" font-size="14" fill="#B36D3A" font-weight="800">提示</text>
+<text x="724" y="788" font-size="13" fill="#61727B" font-weight="600">这里只展示健康背景和来源，不输出诊断结论。</text>
+
+<rect x="1188" y="136" width="212" height="812" rx="24" fill="#FFFFFF" filter="url(#softShadow)"/>
+<text x="1216" y="184" font-size="22" fill="#173844" font-weight="800">快捷操作</text>
+<rect x="1216" y="220" width="156" height="48" rx="16" fill="#EEFBF8"/><text x="1294" y="250" font-size="14" fill="#087B83" font-weight="800" text-anchor="middle">编辑档案</text>
+<rect x="1216" y="282" width="156" height="48" rx="16" fill="#F8FCFB" stroke="#DCE9E6"/><text x="1294" y="312" font-size="14" fill="#61727B" font-weight="800" text-anchor="middle">通知设置</text>
+<rect x="1216" y="344" width="156" height="48" rx="16" fill="#F8FCFB" stroke="#DCE9E6"/><text x="1294" y="374" font-size="14" fill="#61727B" font-weight="800" text-anchor="middle">设备接入</text>
+<rect x="1216" y="406" width="156" height="48" rx="16" fill="#F8FCFB" stroke="#DCE9E6"/><text x="1294" y="436" font-size="14" fill="#61727B" font-weight="800" text-anchor="middle">体检报告</text>
+</svg>

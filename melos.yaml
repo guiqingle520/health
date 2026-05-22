@@ -1,0 +1,10 @@
+name: health
+packages:
+  - apps/mobile
+  - packages/**
+
+scripts:
+  analyze_mobile: |
+    cd apps/mobile && flutter analyze
+  test_mobile: |
+    cd apps/mobile && flutter test
